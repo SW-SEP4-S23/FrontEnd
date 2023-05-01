@@ -1,0 +1,69 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-size: 1.6rem;
+}
+
+html{
+    margin: none;
+    padding: none;
+    display: flex;
+    align-content: flex-start;
+    font-size: 10px;
+}
+
+
+
+nav {
+    font-size: 2rem;
+}
+
+
+/* ----------------Navigationbar styles----------------- */
+nav * {
+    margin: 10px;
+}
+
+
+.navBar{
+    width: 100%;
+    background-color: crimson;
+    padding: 2%;
+    margin-top: 0;
+}
+
+/*--------------Tabs and data styles -----------------------*/
+.tab-box{
+    padding-top: 2%;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.header-data{
+    text-align: center;
+}
+
+.table-data{
+    width: 100%;
+    display: flex;
+}
+
+
+.tabconent{
+    width: 100%;
+    display: flex;
+    margin: 1rem;
+
+}
+
+.dataContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
