@@ -10,8 +10,8 @@ export default function Information() {
     let dataArray = []
     
     useEffect(() => {
-        /*setData(fetch(`ENDPOINTFROMCLOUD/${dataName}}`).then(res => res.json()))*/
-        setData(dummyData.measurements)
+        setData(fetch(`ENDPOINTFROMCLOUD/${dataName}}`).then(res => res.json()))
+        /*setData(dummyData.measurements)*/
     }, [dataName])
 
     return (
