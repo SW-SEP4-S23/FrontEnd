@@ -5,11 +5,11 @@ import "../css/styles.css";
 import "../css/Data.css";
 
 function Data() {
-    const [activeTab, setActiveTab] = useState("");
-    //const [filter, setFilter] = useState("");
-    const [data, setData] = useState([]);
-    const [displayType, setDisplayType] = useState("graf");
-    const [dataName, setDataName] = useState("humidity");
+    const [activeTab, setActiveTab] = useState("")
+    //const [filter, setFilter] = useState("")
+    const [data, setData] = useState([])
+    const [displayType, setDisplayType] = useState("graf")
+    const [dataName, setDataName] = useState("humidity")
 
     const handleTabClick = (tabName) => {
         setActiveTab(tabName)
@@ -29,8 +29,8 @@ function Data() {
     }, [dataName])
 
     useEffect(() => {
-    console.log(dummyData.data)
-    console.log(data)
+        console.log(dummyData.data)
+        console.log(data)
     }, [data])
 
     return (
@@ -58,24 +58,24 @@ function Data() {
                     >
                         CO2
                     </button>
-                <div>
-                    <button
-                        className={displayType === "graf" ? "displaylinks active" : "displaylinks"}
-                        onClick={() => handleDisplayTypeClick("graf")}
-                    >
-                        Graf
-                    </button>
-                    <button
-                        className={displayType === "table" ? "displaylinks active" : "displaylinks"}
-                        onClick={() => handleDisplayTypeClick("table")}
-                    >
-                        Table
-                    </button>
-                </div>
-                <div>
-                    <label>Start:</label><input></input>
-                    <label>Slut:</label><input></input>
-                </div>
+                    <div>
+                        <button
+                            className={displayType === "graf" ? "displaylinks active" : "displaylinks"}
+                            onClick={() => handleDisplayTypeClick("graf")}
+                        >
+                            Graf
+                        </button>
+                        <button
+                            className={displayType === "table" ? "displaylinks active" : "displaylinks"}
+                            onClick={() => handleDisplayTypeClick("table")}
+                        >
+                            Table
+                        </button>
+                    </div>
+                    <div>
+                        <label>Start:</label><input></input>
+                        <label>Slut:</label><input></input>
+                    </div>
 
 
                 </div>
@@ -97,15 +97,15 @@ function Data() {
                                     <th>Humidity</th>
                                 </tr>
                                 {data !== undefined ? (data.map(data => {
-return (
-        <tr>
-            <td>{data.createdAt.split("T")[0]}</td>
-            <td>{data.createdAt.split("T")[1].replace("Z", "").split(":").slice(0,2).join(":")}</td>
-            <td>{data.measurement}</td>
-        </tr>
+                                    return (
+                                        <tr>
+                                            <td>{data.createdAt.split("T")[0]}</td>
+                                            <td>{data.createdAt.split("T")[1].replace("Z", "").split(":").slice(0, 2).join(":")}</td>
+                                            <td>{data.measurement}</td>
+                                        </tr>
 
-)
-})) : null}
+                                    )
+                                })) : null}
                             </tbody>
 
                         </table>
@@ -130,17 +130,17 @@ return (
                                 </tr>
                                 {data !== undefined ? (data.map(data => {
 
-return (
-    
+                                    return (
 
-        <tr>
-            <td>{data.createdAt.split("T")[0]}</td>
-            <td>{data.createdAt.split("T")[1].replace("Z", "").split(":").slice(0,2).join(":")}</td>
-            <td>{data.measurement}</td>
-        </tr>
 
-)
-})) : null}
+                                        <tr>
+                                            <td>{data.createdAt.split("T")[0]}</td>
+                                            <td>{data.createdAt.split("T")[1].replace("Z", "").split(":").slice(0, 2).join(":")}</td>
+                                            <td>{data.measurement}</td>
+                                        </tr>
+
+                                    )
+                                })) : null}
                             </tbody>
 
                         </table>
@@ -166,21 +166,21 @@ return (
                                     <th>CO2</th>
                                 </tr>
                             </thead>
-                            <tbody>                           
-                                    {data !== undefined ? (data.map(data => {
+                            <tbody>
+                                {data !== undefined ? (data.map(data => {
 
-                                        return (
-                                            
+                                    return (
 
-                                                <tr>
-                                                    <td>{data.createdAt.split("T")[0]}</td>
-                                                    <td>{data.createdAt.split("T")[1].replace("Z", "").split(":").slice(0,2).join(":")}</td>
-                                                    <td>{data.measurement}</td>
-                                                </tr>
-                                    
-                                        )
-                                    })) : null}
-                            
+
+                                        <tr>
+                                            <td>{data.createdAt.split("T")[0]}</td>
+                                            <td>{data.createdAt.split("T")[1].replace("Z", "").split(":").slice(0, 2).join(":")}</td>
+                                            <td>{data.measurement}</td>
+                                        </tr>
+
+                                    )
+                                })) : null}
+
                             </tbody>
 
                         </table>
