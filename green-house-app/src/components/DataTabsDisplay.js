@@ -1,30 +1,26 @@
-import React, { useState } from "react";
-import "../css/styles.css";
-import "../css/Data.css";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import TabsTable from "./TabsTable";
+import "../css/styles.css"
+import "../css/Data.css"
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
+import DataTable from "./DataTable"
 
-function DataTabsDisplay({ data, setDataName }) {
+function DataTabsDisplay({ data, setDataName, setEndDate}) {
     return (
         <>
             <div className="Data">
                 <Tabs className="Tabs">
                     <TabList>
-                        <Tab onClick={setDataName("Humidity")}>Humidity</Tab>
-                        <Tab onClick={setDataName("Temperature")}>Temperature</Tab>
-                        <Tab onClick={setDataName("CO2")}>CO2</Tab>
+                        <Tab onClick={() => setDataName("Humidity")}>Humidity</Tab>
+                        <Tab onClick={() => setDataName("Temperature")}>Temperature</Tab>
+                        <Tab onClick={() => setDataName("CO2")}>CO2</Tab>
                     </TabList>
                     <TabPanel>
-                        <p>Humidity!</p>
-                        <TabsTable data={data} dataName={"Humidity"}/>
+                        <DataTable data={data} dataName={"Humidity"} setEndDate={setEndDate}/>
                     </TabPanel>
                     <TabPanel>
-                        <p>Temperature!</p>
-                        <TabsTable data={data} dataName={"Temperature"}/>
+                        <DataTable data={data} dataName={"Temperature"} setEndDate={setEndDate}/>
                     </TabPanel>
                     <TabPanel>
-                        <p>CO2!</p>
-                        <TabsTable data={data} dataName={"CO2"}/>
+                        <DataTable data={data} dataName={"CO2"} setEndDate={setEndDate}/>
                     </TabPanel>
                 </Tabs>
             </div>

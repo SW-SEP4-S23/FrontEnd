@@ -1,3 +1,4 @@
 export default function Hjem() {
-    return <h1>Forside!</h1>
+    return <> <h1 id="frontpage-greeting">Velkommen</h1>
+</>
 }
