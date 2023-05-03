@@ -18,13 +18,11 @@ export default function App() {
                 <div className="container">
                     <div className="logo">
                         <Link to="/">
-                            <img id="logo-image" src={logo} alt="Logo Image" />
+                            <img id="logo-image" src={logo} alt="Firm Logo" />
                         </Link>
                     </div>
                     <div className="menu-icon" onClick={handleShowNavbar}>
-                        -
-                        -
-                        -
+                        - {/*Mangler et dropdown logo her*/}
                     </div>
                     <div className={`nav-elements  ${showNavbar && 'active'}`}>
                         <ul>
@@ -38,13 +36,6 @@ export default function App() {
                     </div>
                 </div>
             </nav>
-
-            {/*             <div className="navBar">
-                <nav>
-                    <Link to="/">Hjem</Link>
-                    <Link to="/information">Informationer</Link>
-                </nav>
-            </div> */}
             <Outlet />
         </>
     )

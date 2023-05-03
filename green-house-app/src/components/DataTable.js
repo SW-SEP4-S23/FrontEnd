@@ -43,14 +43,14 @@ function DataTable({ data, dataName, setEndDate }) {
         <>
             <div>
                 <select onChange={handleDateSelect}>
-                    <option value="">Select Date Range</option>
-                    <option value="This Year">This Year</option>
-                    <option value="Last Year">Last Year</option>
-                    <option value="This Quarter">This Quarter</option>
-                    <option value="Last Quarter">Last Quarter</option>
-                    <option value="This Month">This Month</option>
-                    <option value="Last Month">Last Month</option>
-                    <option value="This Week">This Week</option>
+                    <option value="">Vælg tidsinterval</option>
+                    <option value="This Week">Denne uge</option>
+                    <option value="This Month">Denne måned</option>
+                    <option value="Last Month">Sidste måned</option>
+                    <option value="This Quarter">Dette kvartal</option>
+                    <option value="Last Quarter">Sidste kvartal</option>
+                    <option value="This Year">Dette år</option>
+                    <option value="Last Year">Sidste år</option>
                 </select>
             </div>
 
@@ -59,8 +59,8 @@ function DataTable({ data, dataName, setEndDate }) {
                 <tbody>
 
                     <tr>
-                        <th>Date and Time</th>
-                        <th>{dataName} value</th>
+                        <th>Dato og tid</th>
+                        <th>{dataName} værdi</th>
                     </tr>
                     {/*                 {data !== undefined ? (data.map(item => {
                     return (
