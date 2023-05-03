@@ -1,7 +1,7 @@
 import "../css/styles.css"
 import "../css/Data.css"
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs"
-import DataTable from "./DataTable"
+import DataContainer from "./DataContainer"
 
 function DataTabsDisplay({ data, setDataName, setEndDate }) {
     return (
@@ -14,13 +14,13 @@ function DataTabsDisplay({ data, setDataName, setEndDate }) {
                         <Tab onClick={() => setDataName("co2")}>CO2</Tab>
                     </TabList>
                     <TabPanel>
-                        <DataTable data={data} dataName={"temperature"} setEndDate={setEndDate} />
+                        <DataContainer data={data} dataName={"temperature"} setEndDate={setEndDate} />                   
                     </TabPanel>
                     <TabPanel>
-                        <DataTable data={data} dataName={"humidity"} setEndDate={setEndDate} />
+                        <DataContainer data={data} dataName={"humidity"} setEndDate={setEndDate} />
                     </TabPanel>
                     <TabPanel>
-                        <DataTable data={data} dataName={"co2"} setEndDate={setEndDate} />
+                        <DataContainer data={data} dataName={"co2"} setEndDate={setEndDate} />
                     </TabPanel>
                 </Tabs>
             </div>
