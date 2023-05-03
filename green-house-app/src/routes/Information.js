@@ -3,13 +3,13 @@ import DataTabsDisplay from "../components/DataTabsDisplay"
 
 export default function Information() {
     const [data, setData] = useState([])
-    const [dataName, setDataName] = useState("")
+    const [dataName, setDataName] = useState("temperature")
     const [endDate, setEndDate] = useState(new Date()) 
     const startDate = new Date()
 
     //henter data pba. valgte tab og tidspunkt
     async function getData() {
-        const response = await fetch(`https://cloud-app-byi2ujnffa-ez.a.run.app/${dataName}?startDate=${startDate.toISOString}&endDate=${endDate.toISOString}`)
+        const response = await fetch(`https://cloud-app-byi2ujnffa-ez.a.run.app/${dataName}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`)
         const jsonData = await response.json()
         setData(jsonData)
         console.log(jsonData)
