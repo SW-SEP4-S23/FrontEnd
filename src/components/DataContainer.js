@@ -5,7 +5,7 @@ import DataTable from "./DataTable";
 function DataContainer({data, dataName, setEndDate})
 {
     const [displayType, setDisplayType] = useState("graf");
-    //Hej fra Pernille
+    //Hej fra Pernille og CO
 
     return (
         <>
