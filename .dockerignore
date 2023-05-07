@@ -1,13 +1,6 @@
-.dockerignore
-
-# Node
-node_modules
-npm-debug.log
-dist
-
-# Git
-.git
-.gitignore
-
-# VS Code
-.vscode
+!src/
+!public/
+!package.json
+!package-lock.json
+!babel.config.js
+!jest.config.js
