@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Start containers
+        run: docker-compose -f "docker-compose.ci.yml" up -d --build
+
+      - name: Run unit tests
+        run: docker-compose -f "docker-compose.ci.yml" run app npm run test
+
+      - name: Deploy page
+        run: docker-compose -f "docker-compose.ci.yml" run app npm run deploy
+
+      - name: Stop containers
+        run: docker-compose -f "docker-compose.ci.yml" down
