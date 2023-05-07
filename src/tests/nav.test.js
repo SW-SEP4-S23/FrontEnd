@@ -8,6 +8,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 
 it("renders without crashing", () => {
     render(<Hjem />);
+    expect(screen.getByText("Fe!")).toBeInTheDocument();
 
   });
 
