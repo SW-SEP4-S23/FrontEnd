@@ -1,5 +1,6 @@
 import React, {useState} from "react"
 import TimeSelect from "./TimeSelect";
+import DataTable from "./DataTable";
 
 function DataContainer({data, dataName, setEndDate})
 {
@@ -14,7 +15,7 @@ function DataContainer({data, dataName, setEndDate})
                 <button className={`databutton ` + (displayType === "table" ? "highlighted" : "")} onClick={()=> setDisplayType("table")}>Table</button>
                 </div>
                 <TimeSelect setEndDate={setEndDate}/>
-                {/*displayType === "graf" ? <GrafDisplay data={data} dataName={dataName}/> : <DataTable data={data} dataName={dataName}/>*/}
+                <DataTable data={data} dataName={dataName}/>
             </div>
         </>
     )
