@@ -38,7 +38,7 @@ function TimeSelect({setEndDate})
 
     return (<>
 
-                <div>
+            <div role={`TimeSelect`}>
                 <select onChange={handleDateSelect}>
                     <option value="">Vælg tidsinterval</option>
                     <option value="This Week">Denne uge</option>
