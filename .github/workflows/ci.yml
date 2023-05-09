@@ -3,7 +3,9 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
-    branches: [feature_docker_container]
+    branches: 
+      - main
+      - dev
 
 jobs:
   tests:
