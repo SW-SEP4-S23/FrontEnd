@@ -2,7 +2,7 @@
 
 ## Description
 
-OPS: This is gonna happen next time main is updated
+OPS: This is gonna happen next time main is updated.
 The application can be found on the following link: https://frontend.github.io/green-house-app/
 
 This is a react application that is used to display data from the green house api.
@@ -44,7 +44,6 @@ $ npm start
 ```
 
 ## Architecture
-¨
 ### Components
 Components are the building blocks of the application. They are the smallest unit of code that can be reused. Components are organized into a tree structure, where each component can have children components. Components can be either functional or class based. Functional components are preferred, as they are easier to test and reason about.
 
