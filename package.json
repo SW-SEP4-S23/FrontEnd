@@ -22,7 +22,7 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
 
-    "dev": "nodemon app.js",
+    "dev": "nodemon --inspect app.js",
     "test": "jest",
     "test:dev": "jest --watchAll --runInBand"
   },

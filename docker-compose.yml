@@ -1,18 +1,15 @@
-version: '3'
+version: '3.7'
 
 services:
   app:
-    build:
-        context: .
-        dockerfile: Dockerfile
-        args:
-          CACHEBUST: $(date +%s)
+    build: 
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./:/app
+      - /app/node_modules
     environment:
-      - NODE_ENV=development  
-    command: npm run dev
+      - NODE_ENV=development    
     ports:
       - 3000:3000
-
-
+      - 9229:9229
