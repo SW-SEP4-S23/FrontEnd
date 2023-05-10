@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: 
+      - '*'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Start containers
+        run: docker-compose -f "docker-compose.ci.yml" up -d --build
+
+      - name: Run unit tests
+        run: docker-compose -f "docker-compose.ci.yml" run app npm run test
+
+      - name: Stop containers
+        run: docker-compose -f "docker-compose.ci.yml" down

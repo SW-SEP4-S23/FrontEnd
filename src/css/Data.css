@@ -1,0 +1,135 @@
+/* Remove browser defaults */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+ 
+/* Style DataTabsDisplay.js wrapper */
+.Data {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+ 
+/* Tab Container */
+.Tabs {
+  width: 80%;
+  height: auto;
+  min-height: 400px;
+  background: RGB(208, 221, 252, 0.9);
+  margin: 3.5rem auto 1.5rem;
+  padding: 2rem 1rem;
+  margin-top: 5%;
+  height: 80vh;
+  color: #404040;
+  border-radius: 2rem;
+}
+ 
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+}
+ 
+.react-tabs__tab-list {
+  width: 70%;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #184259;
+  border-radius: 2rem;
+  padding-left: 0px;
+}
+ 
+.react-tabs__tab {
+  width: 50%;
+  padding: 1rem;
+  list-style: none;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.7s;
+}
+ 
+.react-tabs__tab--selected {
+  background: #39A2DB;
+  color: #E8F0F2;
+}
+ 
+.react-tabs__tab--disabled {
+  color: gray;
+  cursor: default;
+}
+ 
+.react-tabs__tab:hover {
+  background: rgba(50, 224, 196, 0.15);
+}
+ 
+.react-tabs__tab:first-child {
+  border-bottom-left-radius: 2rem;
+  border-top-left-radius: 2rem;
+}
+ 
+.react-tabs__tab:last-child {
+  border-bottom-right-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+ 
+.react-tabs__tab-panel {
+  display: none;
+}
+ 
+.react-tabs__tab-panel--selected {
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+@media only screen and (max-width: 767px) {
+  .react-tabs__tab-list {
+    flex-direction: column;
+    align-items: center;
+  }
+  .react-tabs__tab {
+    border-bottom-left-radius: 2rem;
+    border-top-left-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
+  }
+}
+
+
+/*-------------datacontainer*/
+
+.datacontainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.displayContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items:  center;
+}
+
+.graf-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-items:  center;
+}
