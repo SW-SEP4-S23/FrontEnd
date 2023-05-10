@@ -10,7 +10,7 @@ export default function Information() {
   //henter data pba. valgte tab og tidspunkt
   async function getData() {
     const response = await fetch(
-      `https://cloud-app-byi2ujnffa-ez.a.run.app/${dataName}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
+      `https://cloud-app-byi2ujnffa-ez.a.run.app/${dataName}?startDate=${endDate.toISOString()}&endDate=${startDate.toISOString()}`
     );
     const jsonData = await response.json();
 

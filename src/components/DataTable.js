@@ -2,15 +2,8 @@ import "../css/Data.css"
 import "../css/styles.css"
 
 function DataTable({ data, dataName }) {
-
-
-
-
     return (
         <>
-
-
-
             <table>
                 <tbody>
 
@@ -22,9 +15,9 @@ function DataTable({ data, dataName }) {
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.createdAt.split("T")[0]}</td>
-                                <td>{item.createdAt.split("T")[1].replace("Z", "").split(":").slice(0, 2).join(":")}</td>
-                                <td>{item.measurement}</td>
+                                <td>{item.timestamp.split("T")[0]}</td>
+                                <td>{item.timestamp.split("T")[1].replace("Z", "").split(":").slice(0, 2).join(":")}</td>
+                                <td>{item[dataName]}</td>
                             </tr>
                         )
                     })) : <tr><td>No data available.</td></tr>}
