@@ -8,11 +8,11 @@ import { render, fireEvent, getByRole, screen } from '@testing-library/react';
 import DataContainer from '../components/DataContainer';
 
 describe('DataContainer', () => {
-    const data = [
-        { id: 1, createdAt: '2023-05-09T12:34:56Z', measurement: 123 },
-        { id: 2, createdAt: '2023-05-09T12:45:06Z', measurement: 456 },
-      ];
-      const dataName = 'My Data';
+  const dataName = 'temperature';
+  const data = [
+    { id: 1, timestamp: '2023-05-09T12:34:56Z', [dataName]: 123 },
+    { id: 2, timestamp: '2023-05-09T12:45:06Z', [dataName]: 456 },
+  ];
   const setEndDate = jest.fn();
 
   it('renders without crashing', () => {
