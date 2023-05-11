@@ -1,4 +1,5 @@
 import OkBox from "../components/OkBox";
+import "../css/EnvironmentValues.css"
 import SetEnvironmentValue from "../components/SetEnvironmentValue";
 import React, { useState, useEffect } from "react";
 
@@ -23,7 +24,9 @@ export default function EnvironmentValues() {
     }
 
     return <>
-        <SetEnvironmentValue setDataName={setDataName} setMinValue={setMinValue} setMaxValue={setMaxValue} setDataValues={setDataValues} />
-        <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synglig hvis responskode er 200*/}
+        <div className="environment-values">
+            <SetEnvironmentValue setDataName={setDataName} setMinValue={setMinValue} setMaxValue={setMaxValue} setDataValues={setDataValues} />
+            <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synglig hvis responskode er 200*/}
+        </div>
     </>
 }

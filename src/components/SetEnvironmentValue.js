@@ -11,7 +11,7 @@ function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, setDataVal
 
     return (
         <>
-            <div>
+            <div className="setEnvironmentValueDiv">
                 <div>
                     <select defaultValue="" onChange={handleSelectChange}>
                         <option disabled value="">
