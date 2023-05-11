@@ -2,14 +2,15 @@ version: '3.7'
 
 services:
   app:
+    container_name: app
     build: 
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./:/app
+      - .:/app
       - /app/node_modules
     environment:
-      - NODE_ENV=development    
+      - CHOKIDAR_USEPOLLING=true
+      - ENV NODE_ENV=development
     ports:
       - 3000:3000
-      - 9229:9229

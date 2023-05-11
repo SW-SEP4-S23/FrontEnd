@@ -6,13 +6,11 @@ WORKDIR /app
 # Install libary + ./ --> der hvor den skal kopieres hen. 
 COPY package*.json ./
 
-RUN npm install -g nodemon
-
 # Install app dependencies 
-RUN npm install --include=dev --quiet
+RUN npm install --include=dev
 
-COPY . .
+COPY . ./
 
-ENTRYPOINT ["nodemon", "/app/server.js"]  
+ENV WATCHPACK_POLLING=true
 
-# Kopierer resten. 
+CMD ["npm", "run", "start"]
