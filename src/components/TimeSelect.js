@@ -1,5 +1,4 @@
-function TimeSelect({setEndDate})
-{
+function TimeSelect({ setEndDate }) {
 
     const handleDateSelect = (event) => {
         const value = event.target.value
@@ -33,23 +32,27 @@ function TimeSelect({setEndDate})
             default:
                 setEndDate(null)
                 break
+            case 'Today':
+                setEndDate(new Date())
+                break
         }
     }
 
     return (<>
 
-            <div role={`TimeSelect`}>
-                <select onChange={handleDateSelect}>
-                    <option value="">Vælg tidsinterval</option>
-                    <option value="This Week">Denne uge</option>
-                    <option value="This Month">Denne måned</option>
-                    <option value="Last Month">Sidste måned</option>
-                    <option value="This Quarter">Dette kvartal</option>
-                    <option value="Last Quarter">Sidste kvartal</option>
-                    <option value="This Year">Dette år</option>
-                    <option value="Last Year">Sidste år</option>
-                </select>
-            </div>
-    
+        <div role={`TimeSelect`}>
+            <select onChange={handleDateSelect}>
+                <option value="">Vælg tidsinterval</option>
+                <option value="Today">Idag</option>
+                <option value="This Week">Denne uge</option>
+                <option value="This Month">Denne måned</option>
+                <option value="Last Month">Sidste måned</option>
+                <option value="This Quarter">Dette kvartal</option>
+                <option value="Last Quarter">Sidste kvartal</option>
+                <option value="This Year">Dette år</option>
+                <option value="Last Year">Sidste år</option>
+            </select>
+        </div>
+
     </>)
 } export default TimeSelect
