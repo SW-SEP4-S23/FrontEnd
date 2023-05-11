@@ -14,9 +14,8 @@ export default function Information() {
     );
     const jsonData = await response.json();
 
-    if (jsonData.length > 0) {
-      setData(jsonData);
-    }
+    setData(jsonData);
+
     console.log(jsonData);
   }
 
