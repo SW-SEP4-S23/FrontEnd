@@ -29,7 +29,7 @@ export default function Information() {
   /*når dataName eller endDate ændres, ift. hvilken tab og tidspunkt man har trykket på,
     så rerenders siden, og den korrekte data hentes*/
   useEffect(() => {
-    //getData();
+    getData();
 
     //nedenstående sørger for at fjerne missing dependency warning på [dataName, endDate]
     //eslint-disable-next-line react-hooks/exhaustive-deps
