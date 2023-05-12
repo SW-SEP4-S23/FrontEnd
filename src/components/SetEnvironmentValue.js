@@ -1,5 +1,7 @@
 import "../css/styles.css"
 import "./SetEnvironmentValue.css"
+import "../utils/dataNameToLabel.js"
+import dataNameToLabel from "../utils/dataNameToLabel.js"
 
 
 function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, setDataValues, thresholds, currentValues}) {
@@ -18,7 +20,7 @@ function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, setDataVal
             <div className="setEnvironmentValueDiv">
                 {["temperature", "humidity", "co2"].map((dataName) => (<div key={dataName}> 
                 <div className="environmentValueCard">
-                <p className="valueName">{dataName}</p>
+                <p className="valueName">{dataNameToLabel(dataName)}</p>
                 <div className="thresholds">
                     <div className="thresholdsinputs">
                         <div className="thresholdsinput">
