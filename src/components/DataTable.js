@@ -1,5 +1,7 @@
 import "../css/Data.css"
 import "../css/styles.css"
+import dataNameToLabel from "../utils/dataNameToLabel"
+import "../utils/dataNameToLabel.js"
 
 function DataTable({ data, dataName }) {
     return (
@@ -10,7 +12,7 @@ function DataTable({ data, dataName }) {
                     <tr>
                         <th>Dato</th>
                         <th>Tid</th>
-                        <th>{dataName} værdi</th>
+                        <th>{dataNameToLabel(dataName)}</th>
                     </tr>
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
@@ -20,7 +22,7 @@ function DataTable({ data, dataName }) {
                                 <td>{item[dataName]}</td>
                             </tr>
                         )
-                    })) : <tr><td>No data available.</td></tr>}
+                    })) : <tr><td>Ingen data at vise.</td></tr>}
                 </tbody>
             </table>
         </>

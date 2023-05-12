@@ -133,3 +133,15 @@ tbody {
   justify-content: center;
   justify-items:  center;
 }
+
+td, th {
+  text-align: center;
+  border: 1px solid #000000;
+}
+
+table {
+  width: 90%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 1rem auto;
+}
