@@ -13,5 +13,6 @@ async function fetchData(dataName, startDate, endDate, setData) {
     }
     else {
       alert("Server fejl, prøv igen senere.")
+        setData([])
     }
   } export default fetchData

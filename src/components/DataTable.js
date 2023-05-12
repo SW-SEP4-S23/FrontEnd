@@ -22,7 +22,7 @@ function DataTable({ data, dataName }) {
                                 <td>{item[dataName]}</td>
                             </tr>
                         )
-                    })) : <tr><td>Ingen data at vise.</td></tr>}
+                    })) : <tr><td colSpan={3} >Ingen data at vise.</td></tr>}
                 </tbody>
             </table>
         </>
