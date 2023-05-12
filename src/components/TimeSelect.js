@@ -3,6 +3,8 @@ function TimeSelect({ setEndDate }) {
     const handleDateSelect = (event) => {
         const value = event.target.value
 
+        if (value === "") return
+
         //switch som giver korrekt tidspunkt ift. dagsdato
         switch (value) {
             case 'This Year':
