@@ -33,7 +33,7 @@ export default function App() {
                                 <Link to="/information">Informationer</Link>
                             </li>
                             <li>
-                                <Link to="/miljøværdier">Sæt miljøværdier</Link>
+                                <Link to="/miljøværdier">Miljøværdier</Link>
                             </li>
                         </ul>
                     </div>
