@@ -11,10 +11,10 @@ function OkBox({ httpResponseCode, isOkBoxVisible, setIsVisible }) {
     }, [isOkBoxVisible]);
 
     return (
-        <>
-            {isOkBoxVisible && httpResponseCode === 200 && <div>YAYYYYYY</div>}
-            {isOkBoxVisible && httpResponseCode !== 200 && <div>NOOOOOO</div>}
-        </>
+        <div data-testid={`ok-box`}>
+            {isOkBoxVisible && httpResponseCode === 200 && <div style={{color: "green"}}>Værdierne er sat!</div>}
+            {isOkBoxVisible && httpResponseCode !== 200 && <div style={{color: "red"}}>Der skete en fejl, prøv igen senere</div>}
+        </div>
     );
 }
 
