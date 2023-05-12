@@ -1,20 +1,14 @@
 .environment-values{
+    display: flex;
+    flex-direction: column;
     margin: auto;
-    color: antiquewhite;
-    background-color: rgb(0, 0, 0, .9);
+    color: #2f234f;
+    background-color: #fef7e5;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
-    padding: 10%;
-    margin-top: 10%;
-}
-
-.setEnvironmentValueDiv{
-    text-align: center;
-    display: inherit;
-    flex-direction: column;
-    align-items: center;
-    justify-self: center;
-
+    width: 90%;
+    padding: 5%;
+    margin-top: 5%;
 }
