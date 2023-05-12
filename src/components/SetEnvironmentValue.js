@@ -1,34 +1,39 @@
 import "../css/styles.css"
+import "./SetEnvironmentValue.css"
 
 
-function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, setDataValues }) {
+function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, setDataValues, thresholds, currentValues}) {
 
-    const handleSelectChange = (event) => {
-        if (event.target.value !== "") {
-            setDataName(event.target.value);
-        }
-    };
+    if (!thresholds || thresholds.length === 0) {
+        thresholds = {temperature: {min: 20, max: 25}, humidity: {min: 40, max: 60}, co2: {min: 2, max: 4}}
+    }
+
+    if (currentValues === undefined || currentValues?.length === 0) {
+        currentValues = {temperature: 22.3, humidity: "62%", co2: "3.2%"}
+    }
+
 
     return (
         <>
             <div className="setEnvironmentValueDiv">
-                <div>
-                    <select defaultValue="" onChange={handleSelectChange}>
-                        <option disabled value="">
-                            Vælg miljø
-                        </option>
-                        <option value="temperature">temperatur</option>
-                        <option value="humidity">Luftfugtighed</option>
-                        <option value="co2">CO2</option>
-                    </select>
+                {["temperature", "humidity", "co2"].map((dataName) => (<div key={dataName}> 
+                <div className="environmentValueCard">
+                <p className="valueName">{dataName}</p>
+                <div className="thresholds">
+                    <div className="thresholdsinputs">
+                        <div className="thresholdsinput">
+                        <label>min:<input name="min" type="number" placeholder={thresholds[dataName]?.min} onChange={(event) => setMinValue(event.target.value)} /></label>
+                        </div>
+                        <p className="currentValue">{currentValues[dataName]}</p>
+                        <div className="thresholdsinput">
+                        <label>max:<input name="max" type="number" placeholder={thresholds[dataName]?.max} onChange={(event) => setMaxValue(event.target.value)} /></label>
+                        </div>
+                    </div>
+                        <button onClick={() => setDataValues(dataName)}>OK</button>
+                    </div>
                 </div>
-                <div>
-                    <p>Minimum værdi</p>
-                    <input type="number" placeholder="Minimum" onChange={(event) => setMinValue(event.target.value)} />
-                    <p>Maximum værdi</p>
-                    <input type="number" placeholder="Maximum" onChange={(event) => setMaxValue(event.target.value)} />
-                </div>
-                <button onClick={() => setDataValues()}>OK</button>
+                
+                </div>))}
             </div>
         </>
     );

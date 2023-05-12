@@ -1,0 +1,91 @@
+.environmentValueCard {
+  margin: 1rem;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  min-width: 20rem;
+}
+
+.setEnvironmentValueDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  display: inherit;
+  align-items: center;
+  justify-self: center;
+}
+
+@media screen and (max-width: 750px) {
+  .setEnvironmentValueDiv {
+    flex-direction: column;
+  }
+}
+
+.thresholdsinputs {
+    display : flex;
+    flex-direction: column;
+
+}
+
+.thresholdsinputs input{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+}
+
+.thresholdsinput
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.thresholdsinput p {
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    opacity: 0.8;
+}
+
+.thresholdsinputs p.currentValue{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: 3rem;
+}
+
+p.valueName{
+    text-transform: capitalize;
+    font-size: 1.8rem;
+}
+
+button {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: #ebebeb;
+    cursor: pointer;
+}
