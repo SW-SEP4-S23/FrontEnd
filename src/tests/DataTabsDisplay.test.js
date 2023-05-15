@@ -8,6 +8,7 @@ import { render, fireEvent } from '@testing-library/react';
 import DataTabsDisplay from '../components/DataTabsDisplay';
 
 describe('DataTabsDisplay', () => {
+
   const dataName = 'temperature';
   const data = [
     { id: 1, timestamp: '2023-05-09T12:34:56Z', [dataName]: 123 },

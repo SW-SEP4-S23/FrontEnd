@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import TimeSelect from "./TimeSelect";
 import DataTable from "./DataTable";
+import DataGraph from "./DataGraph";
 
 function DataContainer({ data, dataName, setEndDate }) {
     const [displayType, setDisplayType] = useState("graf");
@@ -14,7 +15,7 @@ function DataContainer({ data, dataName, setEndDate }) {
                     <button id={`tablebutton`} className={`databutton ` + (displayType === "table" ? "highlighted" : "")} onClick={() => setDisplayType("table")}>Tabel</button>
                 </div>
                 <TimeSelect setEndDate={setEndDate} />
-                <DataTable data={data} dataName={dataName} />
+                {displayType === "table" ? <DataTable data={data} dataName={dataName} /> : <DataGraph data={data} dataName={dataName} />}
             </div>
         </>
     )

@@ -6,15 +6,11 @@ WORKDIR /app
 # Install libary + ./ --> der hvor den skal kopieres hen. 
 COPY package*.json ./
 
-RUN npm cache clean --force
-
 # Install app dependencies 
-RUN npm install --include=dev & npm cache clean --force
+RUN npm install --include=dev
 
-# Kopierer resten. 
-COPY . .
+COPY . ./
 
-# Docker bruger til at kommunikere med container
-EXPOSE 3000
+ENV WATCHPACK_POLLING=true
 
-# Den der starter app
+CMD ["npm", "run", "start"]
