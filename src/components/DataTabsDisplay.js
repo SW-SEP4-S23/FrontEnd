@@ -10,7 +10,7 @@ function DataTabsDisplay({ data, setDataName, setEndDate }) {
                 <Tabs className="Tabs">
                     <TabList>
                         <Tab onClick={() => setDataName("temperature")}>Temperatur</Tab>
-                        <Tab onClick={() => setDataName("humidity")}>Fugtighed</Tab>
+                        <Tab onClick={() => setDataName("humidity")}>Luftfugtighed</Tab>
                         <Tab onClick={() => setDataName("co2")}>CO2</Tab>
                     </TabList>
                     <TabPanel>

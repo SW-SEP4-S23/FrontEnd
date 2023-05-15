@@ -12,7 +12,7 @@ function DataContainer({ data, dataName, setEndDate }) {
             <div data-testid={`${dataName}-container`} className="displayContainer">
                 <div className="displayToggle" >
                     <button id={`grafbutton`} className={`databutton ` + (displayType === "graf" ? "highlighted" : "")} onClick={() => setDisplayType("graf")}>Graf</button>
-                    <button id={`tablebutton`} className={`databutton ` + (displayType === "table" ? "highlighted" : "")} onClick={() => setDisplayType("table")}>Table</button>
+                    <button id={`tablebutton`} className={`databutton ` + (displayType === "table" ? "highlighted" : "")} onClick={() => setDisplayType("table")}>Tabel</button>
                 </div>
                 <TimeSelect setEndDate={setEndDate} />
                 {displayType === "table" ? <DataTable data={data} dataName={dataName} /> : <DataGraph data={data} dataName={dataName} />}

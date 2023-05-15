@@ -1,0 +1,14 @@
+.environment-values{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    color: #2f234f;
+    background-color: #fef7e5;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    padding: 5%;
+    margin-top: 5%;
+}

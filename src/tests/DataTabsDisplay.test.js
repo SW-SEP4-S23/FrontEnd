@@ -16,28 +16,28 @@ describe('DataTabsDisplay', () => {
   ];
 
   test('renders three tabs', () => {
-    const { getByText } = render(<DataTabsDisplay />);
-    const tempTab = getByText('Temperatur');
-    const humidityTab = getByText('Fugtighed');
-    const co2Tab = getByText('CO2');
+    const { getByText, getAllByText } = render(<DataTabsDisplay />);
+    const tempTab = getAllByText('Temperatur')[0];
+    const humidityTab = getAllByText('Luftfugtighed')[0];
+    const co2Tab = getAllByText('CO2')[0];
     expect(tempTab).toBeInTheDocument();
     expect(humidityTab).toBeInTheDocument();
     expect(co2Tab).toBeInTheDocument();
   });
 
   test('clicking on a tab displays the correct data container', () => {
-    const { getByText, getByTestId } = render(<DataTabsDisplay setDataName={()=>{}}/>);
-    const tempTab = getByText('Temperatur');
+    const { getByText, getByTestId, getAllByText } = render(<DataTabsDisplay setDataName={()=>{}}/>);
+    const tempTab = getAllByText('Temperatur')[0];
     fireEvent.click(tempTab);
     const tempContainer = getByTestId('temperature-container');
     expect(tempContainer).toBeInTheDocument();
 
-    const humidityTab = getByText('Fugtighed');
+    const humidityTab = getAllByText('Luftfugtighed')[0];
     fireEvent.click(humidityTab);
     const humidityContainer = getByTestId('humidity-container');
     expect(humidityContainer).toBeInTheDocument();
 
-    const co2Tab = getByText('CO2');
+    const co2Tab = getAllByText('CO2')[0];
     fireEvent.click(co2Tab);
     const co2Container = getByTestId('co2-container');
     expect(co2Container).toBeInTheDocument();

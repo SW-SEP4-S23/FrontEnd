@@ -6,6 +6,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import DataTable from '../components/DataTable';
+import dataNameToLabel from '../utils/dataNameToLabel';
 
 describe('DataTable', () => {
   const dataName = 'temperature';
@@ -22,7 +23,7 @@ describe('DataTable', () => {
     const { getByText } = render(<DataTable data={data} dataName={dataName} />);
     expect(getByText('Dato')).toBeInTheDocument();
     expect(getByText('Tid')).toBeInTheDocument();
-    expect(getByText(`${dataName} værdi`)).toBeInTheDocument();
+    expect(getByText(dataNameToLabel(dataName))).toBeInTheDocument();
   });
 
   it('displays data rows correctly', () => {
@@ -37,6 +38,6 @@ describe('DataTable', () => {
 
   it('displays a message when there is no data', () => {
     const { getByText } = render(<DataTable data={[]} dataName={dataName} />);
-    expect(getByText('No data available.')).toBeInTheDocument();
+    expect(getByText('Ingen data at vise.')).toBeInTheDocument();
   });
 });
