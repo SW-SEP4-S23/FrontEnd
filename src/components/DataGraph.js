@@ -11,7 +11,7 @@ function DataGraph({ data, dataName }) {
     })
 
     return (
-        <div role="graph">
+        <div role="graph" className="graph">
         <h3>{dataName}</h3>
             <ResponsiveContainer width="95%" height={300}>
                 <LineChart
