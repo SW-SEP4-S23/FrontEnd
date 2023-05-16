@@ -5,6 +5,7 @@ import Hjem from "./routes/Hjem"
 import Information from "./routes/Information"
 import { RouterProvider, createHashRouter } from "react-router-dom"
 import EnvironmentValues from "./routes/EnvironmentValues"
+import PlantManagement from "./routes/PlantManagement"
 
 const router = createHashRouter([
     {
@@ -22,6 +23,10 @@ const router = createHashRouter([
             {
                 path: "/miljøværdier",
                 element: <EnvironmentValues />,
+            },
+            {
+                path: "/plantebeholdning",
+                element: <PlantManagement/>
             },
         ],
     },

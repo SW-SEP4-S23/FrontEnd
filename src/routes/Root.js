@@ -35,6 +35,9 @@ export default function App() {
                             <li>
                                 <Link to="/miljøværdier">Miljøværdier</Link>
                             </li>
+                            <li>
+                                <Link to="/plantebeholdning">Plantebeholdning</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
