@@ -7,8 +7,8 @@ import fetchData from "../services/fetchData";
 
 export default function EnvironmentValues() {
     const [dataName, setDataName] = useState("temperature");
-    const [minValue, setMinValue] = useState();
-    const [maxValue, setMaxValue] = useState();
+    const [minValue, setMinValue] = useState(null);
+    const [maxValue, setMaxValue] = useState(null);
     const [isOkBoxVisible, setIsVisible] = useState(false);
     const [httpResponseCode, setHttpResponseCode] = useState();
     const [thresholds, setThresholds] = useState([]);
@@ -51,7 +51,7 @@ export default function EnvironmentValues() {
 
     return <>
         <div className="environment-values">
-            <SetEnvironmentValue setDataName={setDataName} setMinValue={setMinValue} setMaxValue={setMaxValue} setDataValues={setDataValues} thresholds={thresholds} currentValues={currentValues}/>
+            <SetEnvironmentValue setDataName={setDataName} setMinValue={setMinValue} setMaxValue={setMaxValue} minValue={minValue} maxValue={maxValue} setDataValues={setDataValues} thresholds={thresholds} currentValues={currentValues}/>
             <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}        
         </div>
     </>

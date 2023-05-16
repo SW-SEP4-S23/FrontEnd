@@ -16,7 +16,7 @@ function TimeSelect({ setEndDate }) {
             case 'This Quarter':
                 const thisQuarter = Math.floor((new Date().getMonth() + 3) / 3)
                 setEndDate(new Date(new Date().getFullYear(), 3 * thisQuarter - 3, 1))
-                break;
+                break
             case 'Last Quarter':
                 const lastQuarter = Math.floor((new Date().getMonth() + 3) / 3) - 1
                 setEndDate(new Date(new Date().getFullYear(), 3 * lastQuarter - 3, 1))
@@ -42,7 +42,7 @@ function TimeSelect({ setEndDate }) {
 
     return (<>
 
-        <div role={`TimeSelect`}>
+        <div>
             <select onChange={handleDateSelect}>
                 <option value="">Vælg tidsinterval</option>
                 <option value="Today">Idag</option>

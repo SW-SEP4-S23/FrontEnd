@@ -8,13 +8,13 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import TimeSelect from '../components/TimeSelect';
 
 describe('TimeSelect', () => {
-  test('renders correctly', () => {
+  it('renders correctly', () => {
     render(<TimeSelect />);
     const selectElement = screen.getByRole('combobox');
     expect(selectElement).toBeInTheDocument();
   });
 
-  test('calls setEndDate when an option is selected', () => {
+  it('calls setEndDate when an option is selected', () => {
     const setEndDate = jest.fn();
     render(<TimeSelect setEndDate={setEndDate} />);
     const selectElement = screen.getByRole('combobox');

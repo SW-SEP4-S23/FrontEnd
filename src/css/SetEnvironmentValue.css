@@ -89,3 +89,11 @@ button {
     background-color: #ebebeb;
     cursor: pointer;
 }
+
+input:hover{
+  cursor: inherit;
+}
+
+input{
+  caret-color: transparent;
+}

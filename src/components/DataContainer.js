@@ -1,12 +1,11 @@
 import React, { useState } from "react"
-import TimeSelect from "./TimeSelect";
-import DataTable from "./DataTable";
-import DataGraph from "./DataGraph";
+import TimeSelect from "./TimeSelect"
+import DataTable from "./DataTable"
+import DataGraph from "./DataGraph"
 
 function DataContainer({ data, dataName, setEndDate }) {
-    const [displayType, setDisplayType] = useState("graf");
-    //Hej fra Pernille og CO
-
+    const [displayType, setDisplayType] = useState("graf")
+    
     return (
         <>
             <div data-testid={`${dataName}-container`} className="displayContainer">

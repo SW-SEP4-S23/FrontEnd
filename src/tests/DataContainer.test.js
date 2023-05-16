@@ -15,22 +15,23 @@ describe('DataContainer', () => {
   const setEndDate = jest.fn();
 
   it('renders without crashing', () => {
+    render(<DataContainer data={data} dataName={dataName} setEndDate={setEndDate} />)
+  })
+
+  it('displays data as a graph by default', async () => {
+    render(<DataContainer data={data} dataName={dataName} setEndDate={setEndDate} />)
+    const graphButton = await screen.findByText('Graf')
+    expect(graphButton.classList.contains('highlighted')).toBe(true)
+    const btn = screen.getByRole('graph')
+    expect (btn).toBeInTheDocument() 
+  })
+
+  it('displays data as a table when table button is clicked', async () => {
     render(<DataContainer data={data} dataName={dataName} setEndDate={setEndDate} />);
-  });
+    const tableButton = await screen.findByText('Tabel')
+    fireEvent.click(tableButton)
+    const table = screen.getByRole('table')
+    expect(table).toBeInTheDocument()
+  })
 
-  it('displays data as a graph by default', () => {
-    const { container } = render(<DataContainer data={data} dataName={dataName} setEndDate={setEndDate} />);
-    const graphButton = container.querySelector('#grafbutton');
-    expect(graphButton.classList.contains('highlighted')).toBe(true);
-    expect (screen.getByRole('graph')).toBeInTheDocument();
-  });
-
-  it('displays data as a table when table button is clicked', () => {
-    const { container } = render(<DataContainer data={data} dataName={dataName} setEndDate={setEndDate} />);
-    const tableButton = container.querySelector('#tablebutton');
-    fireEvent.click(tableButton);
-    const table = screen.getByRole('table');
-    expect(table).toBeInTheDocument();
-  });
-
-});
+})
