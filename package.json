@@ -6,6 +6,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "gh-pages": "^5.0.0",
     "jsdom": "^22.0.0",
