@@ -1,52 +1,76 @@
-import "../css/PlantManagement.css"
+import "../css/PlantManagement.css";
+import PlantContainer from "../components/PlantContainer";
+import PlantRegister from "../components/PlantRegister";
+import { useState } from "react";
+import registerPlant from "../services/registerPlant";
+import plantFormInputValidation from "../utils/plantFormInputValidation";
 
+export default function PlantManagement() {
+  const [state, setState] = useState({
+    plantName: "",
+    optimalTemp: "",
+    optimalHumidity: "",
+    optimalCo2: "",
+    stock: "",
+  });
 
-export default function PlantManagement(){
+  const [formToggle, setFormToggle] = useState(false);
 
-    return (
-        <>
-<div id = "PlantCard">
-<div id = "PlantHeader">
-    <h1> Plantebeholdning</h1>
-    <div  id = "PlantSearch"><textarea placeholder="Søg efter plante.."></textarea> 
-    <button>Søg</button></div>
+  const [errors, setErrors] = useState({
+    plantName: "",
+    optimalTemp: "",
+    optimalHumidity: "",
+    optimalCo2: "",
+    stock: "",
+  });
 
-</div>
-<div id = "PlantData">
-<p> Med </p>
-</div>
-<div id = "PlantFooter">
-<button id = "PlantReg">REGISTRER PLANTE</button>
-</div>
-</div>
+  function onChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
 
-<div id = "Planteformel">
-    
-<form>
-<h3>Registrer Plante</h3>
-      <label>Plantenavn
-        <input type="text" />
-      </label>
-      <label>Optimal temperatur
-        <input type="number" />
-      </label>
-      <label>Optimal luftfugtighed
-        <input type="number" />
-      </label>
-      <label>Optimal CO2
-        <input type="number" />
-      </label>
-      <label>Lagerbeholdning
-        <input type="number" />
-      </label>
-      <input type="submit" value = "Tilføj"/>
+  function onSubmit(e) {
+    e.preventDefault();
 
-    </form>
+    const response = plantFormInputValidation(state);
 
-</div>
-</>
-    )
+    if (Object.keys(response).length !== 0) {
+      setErrors(response);
+      return;
+    }
+    registerPlant(state);
+  }
 
+  function openForm() {
+    setFormToggle(true);
+  }
 
+  function closeForm() {
+    setFormToggle(false);
+  }
 
+  return (
+    <>
+      <div>
+        <PlantContainer openForm={openForm} />
+      </div>
+
+      <div>
+        <p>{state.plantName}</p>
+        <PlantRegister
+          onChange={onChange}
+          state={state}
+          onSubmit={onSubmit}
+          errors={errors}
+          closeForm={closeForm}
+          toggleForm={formToggle}
+        />
+      </div>
+    </>
+  );
 }
