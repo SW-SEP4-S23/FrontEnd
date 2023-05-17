@@ -36,24 +36,30 @@ This is a react application that is used to display data from the green house ap
 The container uses Docker to setup and run the application in development mode.  
 This means that the application will be available at `localhost:3000`, and will reflect changes made to the code. In addition you can run your tests in the container.
 
-**Important: make sure you have WSL on your machine have Docker installed and running!**
+>**Important: make sure you have WSL on your machine have Docker installed and running!**
 
 1. Open the project in VS Code.
 
-2. Open a new VC Code Terminal (CTRL + SHIFT + `). This will open a terminal in the context of the project.
+2. Open a new Terminal (CTRL + SHIFT + `). This will open a terminal in the context of the project.
 
-3. Run the command:
+3. Run the following command to update dependencies:
+
+```bash
+$ npm install --include=dev
+```
+
+4. Run the command:
 
 ```bash
 $ npm run docker
 ```
 
-4. The application should now be available at `localhost:3000`.
+5. The application should now be available at `localhost:3000`.
 
-5. To run your tests in the container, run the command: 
+6. To run your tests in the container, run the command: 
 
 ```bash
-$ npm run docker:dev
+$ npm run docker:test
 ```	
 ### Developing locally
 Make sure to install dependencies in case some are missing or outdated.
@@ -78,14 +84,14 @@ $ npm start
 To see the organisations guidelines on workflow, please refer to [SW-SEP4-S23/overview](https://github.com/SW-SEP4-S23)
 
 #### Github Actions
-Git actions are used to automate the devopment and deployment process. The following actions are used:
+Git actions are used to automate the development and deployment process. The following actions are used:
 
-- **Deploy** - This action is triggered when main is main is pushed to and builds and deploys the application to github pages.
+- **Deploy** - This action is triggered when main is pushed to and builds and deploys the application to github pages.
 - **CI** - This action is triggered when a pull request is made and builds the application in a custom container and runs tests.
 
 ## Architecture
 The application is built using React.  
-React applications are structured using a component-based architecture, where the user interface is divided into reusable and independent components. This promotoes reusability, separation of concerns, and a clear flow of data, leading to more maintainable and efficient code.
+React applications are structured using a component-based architecture, where the user interface is divided into reusable and independent components. This promotes reusability, separation of concerns, and a clear flow of data, leading to more maintainable and efficient code.
 
 To read more about React, visit the official documentation:
 [React](https://reactjs.org/)
@@ -94,8 +100,6 @@ To read more about React, visit the official documentation:
 Below is a diagram of the application's overall structure.   
 
 > **Note:** The diagram is not complete, and only shows the most important parts.
-
-> **Note:** This way of structuring the application is not scalable and would be difficult to manage if the application were to grow.
 
 ```
 src/
@@ -161,8 +165,6 @@ import DataGraph from "./DataGraph";
 
 function DataContainer({ data, dataName, setEndDate }) {
     const [displayType, setDisplayType] = useState("graf");
-    //Hej fra Pernille og CO
-
     return (
         <>
             <div data-testid={`${dataName}-container`} className="displayContainer">
@@ -245,7 +247,7 @@ async function fetchData(dataName, startDate, endDate, setData) {
 
 ### Utils
 
-Utils are used to perform common tasks. They are responsible for performing common tasks, such as formatting dates, and converting strings to numbers. Utils should not contain any logic, and should only be used to perform common tasks.
+Utils are responsible for performing common tasks, such as formatting dates, and converting strings to numbers. Utils should not contain any logic, and should only be used to perform common tasks.
 
 This example shows a util that converts a date in a IOS format to a human readable format:
 
