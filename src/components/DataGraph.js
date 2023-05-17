@@ -1,5 +1,5 @@
 import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, ResponsiveContainer } from "recharts"
-import convertTimestamp from "../util/convertTimestamp"
+import convertTimestamp from "../utils/convertTimestamp"
 import "../css/DataGraph.css"
 
 function DataGraph({ data, dataName }) {

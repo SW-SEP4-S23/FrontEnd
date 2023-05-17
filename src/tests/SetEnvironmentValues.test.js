@@ -72,4 +72,25 @@ describe('EnvironmentValues', () => {
     expect(setDataValuesMock).toHaveBeenCalledWith('humidity')
     expect(setDataValuesMock).toHaveBeenCalledWith('co2')
   })
+
+  it('sets min value correctly', () => {
+    // Create mock functions for the required props
+    const setMinValue = jest.fn();
+    const setMaxValue = jest.fn();
+    const setDataValues = jest.fn();
+
+    const { getByLabelText, getByText } = render(
+      <SetEnvironmentValue
+        setMinValue={setMinValue}
+        setMaxValue={setMaxValue}
+        setDataValues={setDataValues}
+      />
+    );
+    // Get the input element for the min value of the first environment value card (temperature)
+    const minInput = getByLabelText('min:');
+    fireEvent.change(minInput, { target: { value: '15' } });
+
+    // Check if the setMinValue function is called with the correct value
+    expect(setMinValue).toHaveBeenCalledWith('15');
+  })
 })

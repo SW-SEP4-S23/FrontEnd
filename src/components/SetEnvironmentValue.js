@@ -5,7 +5,7 @@ import "../utils/maxAndMinValues.js"
 import dataNameToLabel from "../utils/dataNameToLabel.js"
 import maxAndMinValues from "../utils/maxAndMinValues.js"
 
-function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, minValue, maxValue, setDataValues, thresholds, currentValues }) {
+function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, setDataValues, thresholds, currentValues }) {
 
     if (!thresholds || thresholds.length === 0) {
         thresholds = { temperature: { min: 20, max: 25 }, humidity: { min: 40, max: 60 }, co2: { min: 2, max: 4 } }
@@ -28,8 +28,8 @@ function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, minValue, 
                                     <label>min:<input
                                         name="min"
                                         type="number"
-                                        min= {maxAndMinValues(dataName)[0]}
-                                        max={maxValue === null ? maxAndMinValues(dataName)[1] : maxValue }
+                                        min= {maxAndMinValues[dataName][0]}
+                                        max={maxValue === null ? maxAndMinValues[dataName][1] : maxValue }
                                         onKeyDown={(e) => {
                                             e.preventDefault();
                                         }}
@@ -41,11 +41,10 @@ function SetEnvironmentValue({ setDataName, setMinValue, setMaxValue, minValue, 
                                     <label>max:<input
                                         name="max"
                                         type="number"
-                                        min={minValue === null ? maxAndMinValues(dataName)[0] : minValue }
-                                        max={maxAndMinValues(dataName)[1]}
+                                        min={minValue === null ? maxAndMinValues[dataName][0] : minValue }
+                                        max={maxAndMinValues[dataName][1]}
                                         onKeyDown={(e) => {
                                             e.preventDefault();
-                                            return false;
                                         }}
                                         placeholder={thresholds[dataName]?.max} onChange={(event) => setMaxValue(event.target.value)} />
                                     </label>
