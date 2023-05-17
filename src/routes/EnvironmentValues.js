@@ -14,7 +14,7 @@ export default function EnvironmentValues() {
     const [thresholds, setThresholds] = useState([]);
     const [currentValues, setCurrentValues] = useState([]);
 
-
+//TODO - opdater til at bruge nyt endpoint fra backend, se interface contract på drev
     async function fetchAverages() {
         const handleAverage = (data) => {
             if (data.length === 0) return;
