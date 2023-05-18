@@ -21,10 +21,9 @@ function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, set
             <div className="setEnvironmentValueDiv">
                 {["temperature", "humidity", "co2"].map((dataName) => (<div key={dataName}>
                     <div className="environmentValueCard">
-                        <p className="valueName">{dataNameToLabel(dataName)}</p>
                         <div className="thresholds">
                             <div className="thresholdsinputs">
-                            <p className="currentValue">Nuværende værdi: <p id="data-name">{currentValues[dataName]}</p></p>
+                            <p className="currentValue">{dataNameToLabel(dataName)}: <p id="data-name">{currentValues[dataName]}</p></p>
                             <p>Vælg nye værdier:</p>
                                 <div className="thresholdsinput">
                                     <label>min:<input
