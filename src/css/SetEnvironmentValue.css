@@ -97,3 +97,29 @@ input:hover{
 input{
   caret-color: transparent;
 }
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 768px) {
+  .setEnvironmentValueDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50vw;
+  }
+}
+
+@media only screen and (max-width: 643px) {
+  .setEnvironmentValueDiv{
+    margin-top: 70vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+
+
+  .setEnvironmentValueDiv{
+    margin-top: 100vw;
+  }
+}
