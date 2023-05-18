@@ -21,7 +21,7 @@ export default function Information() {
 
   return (
     <>
-      <div className="dataContainer">
+      <div className="dataContainer top-container">
         <DataTabsDisplay
           data={data}
           setDataName={setDataName}

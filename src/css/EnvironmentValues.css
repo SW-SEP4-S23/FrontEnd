@@ -8,7 +8,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%;
-    padding: 5%;
-    margin-top: 5%;
+
 }
+
+.environment-values.top-container::before {
+    background-image: url("../images/flowers-background.jpg");
+    height: 100vh;
+    position: fixed;
+  }
+  
+  

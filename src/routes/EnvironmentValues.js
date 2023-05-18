@@ -49,7 +49,7 @@ export default function EnvironmentValues() {
     }
 
     return <>
-        <div className="environment-values">
+        <div className="environment-values top-container">
             <SetEnvironmentValue setMinValue={setMinValue} setMaxValue={setMaxValue} minValue={minValue} maxValue={maxValue} setDataValues={setDataValues} thresholds={thresholds} currentValues={currentValues}/>
             <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}        
         </div>
