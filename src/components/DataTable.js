@@ -6,7 +6,7 @@ import "../utils/dataNameToLabel.js"
 function DataTable({ data, dataName }) {
     return (
         <>
-            <table>
+            <table className="green-table">
                 <tbody>
 
                     <tr>

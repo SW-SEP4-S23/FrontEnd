@@ -12,10 +12,6 @@ h4 {
   font-family: "Maiandra GD";
 }
 
-.more-information {
-  height: 500px;
-}
-
 .frontpage-container {
   display: flex;
   justify-content: center;
@@ -24,17 +20,19 @@ h4 {
   width: 70%;
   text-align: center;
 }
+
 #frontpage-logo {
   width: 10vw;
   height: autos;
 }
 
 .more-information {
+  height: 80vhvh;
   display: flex;
   justify-content: center;
   font-family: "Maiandra GD";
   font-weight: 900;
-  margin-top: 2vh;
+  margin-top: 8vh;
 }
 
 .circle-container {
@@ -50,18 +48,18 @@ h4 {
 }
 
 .circle-image {
-  width: 120px;
+  width: 130px;
   height: 120px;
   border-radius: 50%;
 }
 
-p{
+.info-text{
   width: 10vw;
   margin: auto;
 }
 
 @media only screen and (max-width: 1200px) {
-  p{
+  .info-text{
     width: 20vw;
     margin: auto;
   }
@@ -92,13 +90,13 @@ p{
     height: 160vh;
   }
   .more-information {
-    padding-top: 20vh;
+    padding-top: 10vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
     margin-top: 0;
   }
-  p{
+  .info-text{
     width: 30vw;
     margin: auto;
   }
@@ -118,6 +116,6 @@ p{
   }
 
   body{
-    height: 220vh;
+    height: 200vh;
   }
 }

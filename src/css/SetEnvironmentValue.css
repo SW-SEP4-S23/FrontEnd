@@ -16,6 +16,11 @@
   display: inherit;
   align-items: center;
   justify-self: center;
+  margin-top: 10vh;
+}
+
+#data-name{
+  color: rgb(55, 164, 113);
 }
 
 @media screen and (max-width: 750px) {
@@ -123,3 +128,5 @@ input{
     margin-top: 100vw;
   }
 }
+
+

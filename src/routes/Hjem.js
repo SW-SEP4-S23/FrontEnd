@@ -19,15 +19,15 @@ export default function Hjem() {
         <div className="more-information">
             <div className="circle-div">
                 <img src={inventory} alt="Lagerbeholdning-billede" className="circle-image" />
-                <p>Få overblik over lagerbeholdningen</p>
+                <p className="info-text">Få overblik over lagerbeholdningen</p>
             </div>
             <div className="circle-div">
                 <img src={enviroment} alt="Miljøværdier-billede" className="circle-image" />
-                <p>Administrer og monitorér aktuelle miljøforhold</p>
+                <p className="info-text">Administrer og monitorér aktuelle miljøforhold</p>
             </div>
             <div className="circle-div">
                 <img src={notifications} alt="Notifikationer-billede" className="circle-image" />
-                <p>Hold dig informeret om opdateringer og påmindelser</p>
+                <p className="info-text">Hold dig informeret om opdateringer og påmindelser</p>
             </div>
             </div>
         </>

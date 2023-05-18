@@ -24,6 +24,8 @@ function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, set
                         <p className="valueName">{dataNameToLabel(dataName)}</p>
                         <div className="thresholds">
                             <div className="thresholdsinputs">
+                            <p className="currentValue">Nuværende værdi: <p id="data-name">{currentValues[dataName]}</p></p>
+                            <p>Vælg nye værdier:</p>
                                 <div className="thresholdsinput">
                                     <label>min:<input
                                         name="min"
@@ -36,7 +38,6 @@ function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, set
                                         placeholder={thresholds[dataName]?.min} onChange={(event) => setMinValue(event.target.value)} />
                                     </label>
                                 </div>
-                                <p className="currentValue">{currentValues[dataName]}</p>
                                 <div className="thresholdsinput">
                                     <label>max:<input
                                         name="max"
@@ -50,7 +51,7 @@ function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, set
                                     </label>
                                 </div>
                             </div>
-                            <button onClick={() => setDataValues(dataName)}>OK</button>
+                            <button className="databutton" onClick={() => setDataValues(dataName)}>OK</button>
                         </div>
                     </div>
 
