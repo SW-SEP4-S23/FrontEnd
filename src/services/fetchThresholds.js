@@ -8,6 +8,6 @@ async function fetchThresholds(setThresholds) {
         setThresholds(data)
       }
       else {
-        console.log("Server fejl, prøv igen senere.")
+       return ("Server fejl, prøv igen senere.")
       }
     } export default fetchThresholds

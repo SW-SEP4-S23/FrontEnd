@@ -1,4 +1,5 @@
-async function fetchData(dataName, startDate, endDate, setData) {
+
+async function fetchData(dataName, startDate, endDate, setData, setServerFail) {
     if (endDate === undefined || startDate === undefined) {
         return
     }
@@ -12,7 +13,7 @@ async function fetchData(dataName, startDate, endDate, setData) {
         setData(jsonData)
     }
     else {
-      console.log("Server fejl, prøv igen senere.")
-        setData([])
+      setServerFail(true)
+      setData([])
     }
   } export default fetchData

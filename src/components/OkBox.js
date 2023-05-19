@@ -1,4 +1,5 @@
 import React, { useEffect } from "react"
+import "../css/ServerFail.css"
 
 function OkBox({ httpResponseCode, isOkBoxVisible, setIsVisible }) {
 
@@ -14,8 +15,14 @@ function OkBox({ httpResponseCode, isOkBoxVisible, setIsVisible }) {
 
     return (
         <div data-testid={`ok-box`}>
-            {isOkBoxVisible && httpResponseCode === 200 && <div style={{ color: "green" }}>Værdierne er sat!</div>}
-            {isOkBoxVisible && httpResponseCode !== 200 && <div style={{ color: "red" }}>Der skete en fejl, prøv igen senere</div>}
+            {isOkBoxVisible && httpResponseCode === 200 &&
+                <div style={{ color: "green" }}>
+                    <h1 className="server-error-message">Værdierne er sat!</h1>
+                </div>}
+            {isOkBoxVisible && httpResponseCode !== 200 &&
+                <div style={{ color: "red" }}>
+                    <h1 className="server-error-message">Der skete en fejl, prøv igen senere</h1>
+                </div>}
         </div>
     )
 }

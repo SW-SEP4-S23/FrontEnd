@@ -4,6 +4,7 @@ import SetEnvironmentValue from "../components/SetEnvironmentValue";
 import React, { useState, useEffect } from "react";
 import fetchThresholds from "../services/fetchThresholds";
 import fetchData from "../services/fetchData";
+import ServerFail from "../components/serverFail";
 
 export default function EnvironmentValues() {
     const [minValue, setMinValue] = useState(null);
@@ -12,6 +13,7 @@ export default function EnvironmentValues() {
     const [httpResponseCode, setHttpResponseCode] = useState();
     const [thresholds, setThresholds] = useState([]);
     const [currentValues, setCurrentValues] = useState([]);
+    const [serverFail, setServerFail] = useState(false)
 
 
     async function fetchAverages() {
@@ -26,7 +28,7 @@ export default function EnvironmentValues() {
         const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
 
         ["temperature", "humidity", "co2"].map((dataName) => {
-            fetchData(dataName, oneHourAgo, now, handleAverage);
+            fetchData(dataName, oneHourAgo, now, handleAverage, setServerFail);
         });
     }
 
@@ -51,7 +53,8 @@ export default function EnvironmentValues() {
     return <>
         <div className="environment-values top-container">
             <SetEnvironmentValue setMinValue={setMinValue} setMaxValue={setMaxValue} minValue={minValue} maxValue={maxValue} setDataValues={setDataValues} thresholds={thresholds} currentValues={currentValues}/>
-            <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}        
+            <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}
+            {serverFail?<ServerFail setServerFail={setServerFail} serverFail={serverFail}/>:""}        
         </div>
     </>
 }
