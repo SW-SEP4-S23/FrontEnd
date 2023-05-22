@@ -1,7 +1,8 @@
 import { useState } from "react"
 import "../css/Logbook.css"
+import OkBox from "./OkBox";
 
-function Logbook({ logMessages, logNewMessage }) {
+function Logbook({ logMessages, logNewMessage, httpResponseCode, isOkBoxVisible, setIsVisible}) {
 
     const [inputValue, setInputValue] = useState('')
 
@@ -13,10 +14,11 @@ function Logbook({ logMessages, logNewMessage }) {
         <>
             <div className="logbook-container">
                 <div className="new-log-message">
-                    <form>
-                        <input type="text" value={inputValue} onChange={handleInputChange}>
-                        </input>
-                        <button onClick={logNewMessage(inputValue)}></button>
+                    <form id="logbook-form">
+                        <textarea value={inputValue} onChange={handleInputChange} id="logTextField">
+                        </textarea>
+                        <button onClick={() => logNewMessage(inputValue)}>Gem</button>
+                        <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} />
                     </form>
                 </div>
                 <div className="log-messages">
@@ -34,6 +36,7 @@ function Logbook({ logMessages, logNewMessage }) {
                             )}
                     </div>
                 </div>
+
             </div>
         </>
     )

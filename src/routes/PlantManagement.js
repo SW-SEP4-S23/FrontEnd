@@ -1,19 +1,28 @@
 import { useState } from "react"
 import Logbook from "../components/Logbook"
 import "../css/PlantManagement.css"
+import OkBox from "../components/OkBox";
 
 
 export default function PlantManagement() {
 
   const [logMessages, setLogMessages] = useState([]);
+  const [isOkBoxVisible, setIsVisible] = useState(false);
+  const [httpResponseCode, setHttpResponseCode] = useState();
+  const [plantName, setPlantName] = useState("");
 
-  function getLogMessages(){
+  function getLogMessages() {
     //fetch messages here, and save in array
     //setLogMessages(fetch.....)
   }
 
-  function logNewMessage(inputValue){
-    //post(inputvalue).... /stock/species/{name}/log
+  async function logNewMessage(inputValue) {
+    const response = await fetch(
+      `https://cloud-app-byi2ujnffa-ez.a.run.app/stock/plants/${plantName}/logs?message=${inputValue}`
+    );
+    setHttpResponseCode(response.status);
+    setIsVisible(true);
+    console.log(response.status)
   }
 
   return (
@@ -58,7 +67,7 @@ export default function PlantManagement() {
         </form> 
       </div>*/}
 
-        <Logbook logMessages={logMessages} logNewMessage={logNewMessage}/>
+        <Logbook logMessages={logMessages} logNewMessage={logNewMessage} httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} />
       </div>
     </>
   )
