@@ -13,27 +13,13 @@ export default function EnvironmentValues() {
     const [currentThresholds, setCurrentThresholds] = useState([]);
     const [currentValues, setCurrentValues] = useState([]);
     const [newThresholds, setNewThresholds] = useState([]);
-    const [serverFail, setServerFail] = useState(false)
-
-
-    async function fetchCurrentValues() {
-        function handleData(response) {
-            setCurrentValues((prev) =>{
-                return {...prev, [response.name]: response.value}
-            });
-        }
-        
-
-        ["temperature", "humidity", "co2"].map((dataName) => {
-            fetchData(dataName, handleData, setServerFail);
-        });
-    }
+    const [serverFail, setServerFail] = useState(false);
 
     useEffect(() => {
         //fetchThresholds(setCurrentThresholds, setServerFail);
         setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
             )
-        fetchCurrentValues();
+        fetchData({setData: setCurrentValues, setServerFail: setServerFail});
     }, []);
 
     useEffect(() => {
@@ -52,9 +38,10 @@ export default function EnvironmentValues() {
 
     async function onSubmit() {
 
-        postThresholds(newThresholds, setServerFail);
+        postThresholds(newThresholds, setServerFail, setHttpResponseCode);
         /*vi tjekker responskode, og hvis den giver 200, skal OkBox lave en grøn boks
         som informerer brugeren om, at de nye værdier er blevet sat*/
+        setHttpResponseCode(200);
         setIsVisible(true);
     }
 

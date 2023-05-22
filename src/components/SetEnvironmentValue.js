@@ -12,18 +12,22 @@ function SetEnvironmentValue({newThresholds, onChange, onSubmit, currentValues }
         newThresholds = { temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
     }
     if (currentValues === undefined || currentValues?.length === 0) {
-        currentValues = { temperature: 22.3, humidity: "62%", co2: "3.2%" }
+        currentValues = [{ type: "temperature", value: 22.3},{ type: "humidity", value: "62%"},{ type: "co2", value: "3.2%" }]
     }
 
 
     return (
         <>
             <div className="setEnvironmentValueDiv">
-                {["temperature", "humidity", "co2"].map((dataName) => (<div key={dataName}>
+                {currentValues.map((dataPoint) => {
+                    const dataName = dataPoint.type.toLowerCase();
+                    const value = dataPoint.value;
+
+                    return(<div key={dataName}>
                     <div className="environmentValueCard">
                         <div className="thresholds">
                             <div className="thresholdsinputs">
-                            <p className="currentValue">{dataNameToLabel(dataName)}: <p id="data-name">{currentValues[dataName]}</p></p>
+                            <p className="currentValue">{dataNameToLabel(dataName)}: </p><p id="data-name">{value}</p>
                             <p>Vælg nye værdier:</p>
                                 <div className="thresholdsinput">
                                     <label>min:<input
@@ -56,7 +60,7 @@ function SetEnvironmentValue({newThresholds, onChange, onSubmit, currentValues }
                         </div>
                     </div>
 
-                </div>))}
+                </div>)})}
             </div>
         </>
     );

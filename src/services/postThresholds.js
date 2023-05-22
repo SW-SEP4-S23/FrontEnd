@@ -1,4 +1,4 @@
-export default function postThresholds(thresholds, setServerFail) {
+export default function postThresholds(thresholds, setServerFail, setHttpResponseCode) {
     // POST request using fetch with error handling
     const requestOptions = {
         method: 'POST',
@@ -22,6 +22,7 @@ export default function postThresholds(thresholds, setServerFail) {
         })
         .catch(error => {
             setServerFail(true);
+            setHttpResponseCode(500);
             console.error('There was an error!', error);
         });
 }
