@@ -1,7 +1,15 @@
 import "../css/PlantManagement.css"
-
+import fetchPlants from "../services/fetchPlants";
+import React, { useState, useEffect } from "react";
+import StockTable from "../components/StockTable";
 
 export default function PlantManagement(){
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchPlants(setData)
+  },[]);
+  
 
     return (
         <>
@@ -12,8 +20,10 @@ export default function PlantManagement(){
     <button>Søg</button></div>
 
 </div>
-<div id = "PlantData">
-<p> Med </p>
+<div id = "PlantData" >
+<StockTable 
+data = {data}
+/>
 </div>
 <div id = "PlantFooter">
 <button id = "PlantReg">REGISTRER PLANTE</button>
@@ -48,5 +58,5 @@ export default function PlantManagement(){
     )
 
 
-
+    
 }
