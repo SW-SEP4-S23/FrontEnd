@@ -1,7 +1,7 @@
 import CloseButton from "react-bootstrap/CloseButton"
 import "../css/PlantManagement.css"
 
-function PlantRegister ({onSubmit, filteredList, onChange, state, errors, toggleForm, closeForm}){
+function PlantRegister ({onSubmit, filteredList, onChange, state, errors, toggleForm, closeForm, plantOptions}){
 
   return (
   <>
@@ -11,10 +11,22 @@ function PlantRegister ({onSubmit, filteredList, onChange, state, errors, toggle
 <CloseButton onClick={()=> closeForm()}></CloseButton>
 <form onSubmit={(e) => onSubmit(e)}>
 <h3>Registrer Plante</h3>
-      <label>Plantenavn
-        <input type="text" onChange={(e)=> onChange(e)} name="plantName" value={state?.plantName}/>
-      </label>
-        {errors?.plantName !=="" ? <p>{errors?.plantName}</p> : null}
+<label>
+              Plantenavn
+              <select
+                onChange={(e) => onChange(e)}
+                name="plantName"
+                value={state?.plantName}
+              >
+                <option value="">Select a plant</option>
+                {plantOptions.map((plant) => (
+                  <option key={plant.id} value={plant.id}>
+                    {plant.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            {errors?.plantName !== "" ? <p>{errors?.plantName}</p> : null}
       <label>Optimal temperatur
         <input type="number" onChange={(e)=> onChange(e)} name="optimalTemp" value={state?.optimalTemp}/>
       </label>

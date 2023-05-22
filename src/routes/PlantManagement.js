@@ -1,9 +1,10 @@
 import "../css/PlantManagement.css";
 import PlantContainer from "../components/PlantContainer";
 import PlantRegister from "../components/PlantRegister";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import registerPlant from "../services/registerPlant";
 import plantFormInputValidation from "../utils/plantFormInputValidation";
+import fetchPlants from "../services/fetchPlants";
 
 export default function PlantManagement() {
   const [state, setState] = useState({
@@ -13,6 +14,16 @@ export default function PlantManagement() {
     optimalCo2: "",
     stock: "",
   });
+
+  const [plantOptions, setPlantOptions] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const options = await fetchPlants();
+      setPlantOptions(options);
+    }
+    fetchData();
+  }, []);
 
   const [formToggle, setFormToggle] = useState(false);
 
@@ -63,6 +74,7 @@ export default function PlantManagement() {
       <div>
         <p>{state.plantName}</p>
         <PlantRegister
+          plantOptions={plantOptions}
           onChange={onChange}
           state={state}
           onSubmit={onSubmit}
