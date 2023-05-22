@@ -1,51 +1,67 @@
+import { useState } from "react"
+import Logbook from "../components/Logbook"
 import "../css/PlantManagement.css"
 
 
-export default function PlantManagement(){
+export default function PlantManagement() {
 
-    return (
-        <>
-<div id = "PlantCard">
-<div id = "PlantHeader">
-    <h1> Plantebeholdning</h1>
-    <div  id = "PlantSearch"><textarea placeholder="Søg efter plante.."></textarea> 
-    <button>Søg</button></div>
+  const [logMessages, setLogMessages] = useState([]);
 
-</div>
-<div id = "PlantData">
-<p> Med </p>
-</div>
-<div id = "PlantFooter">
-<button id = "PlantReg">REGISTRER PLANTE</button>
-</div>
-</div>
+  function getLogMessages(){
+    //fetch messages here, and save in array
+    //setLogMessages(fetch.....)
+  }
 
-<div id = "Planteformel">
-    
-<form>
-<h3>Registrer Plante</h3>
-      <label>Plantenavn
-        <input type="text" />
-      </label>
-      <label>Optimal temperatur
-        <input type="number" />
-      </label>
-      <label>Optimal luftfugtighed
-        <input type="number" />
-      </label>
-      <label>Optimal CO2
-        <input type="number" />
-      </label>
-      <label>Lagerbeholdning
-        <input type="number" />
-      </label>
-      <input type="submit" value = "Tilføj"/>
+  function logNewMessage(inputValue){
+    //post(inputvalue).... /stock/species/{name}/log
+  }
 
-    </form>
+  return (
+    <>
+      <div className="plant-management-container">
+        {/*       <div id="PlantCard">
+        <div id="PlantHeader">
+          <h1> Plantebeholdning</h1>
+          <div id="PlantSearch"><textarea placeholder="Søg efter plante.."></textarea>
+            <button>Søg</button></div>
 
-</div>
-</>
-    )
+        </div>
+        <div id="PlantData">
+          <p> Med </p>
+        </div>
+        <div id="PlantFooter">
+          <button id="PlantReg">REGISTRER PLANTE</button>
+        </div>
+      </div>
+
+      <div id="Planteformel">
+
+        <form>
+          <h3>Registrer Plante</h3>
+          <label>Plantenavn
+            <input type="text" />
+          </label>
+          <label>Optimal temperatur
+            <input type="number" />
+          </label>
+          <label>Optimal luftfugtighed
+            <input type="number" />
+          </label>
+          <label>Optimal CO2
+            <input type="number" />
+          </label>
+          <label>Lagerbeholdning
+            <input type="number" />
+          </label>
+          <input type="submit" value="Tilføj" />
+
+        </form> 
+      </div>*/}
+
+        <Logbook logMessages={logMessages} logNewMessage={logNewMessage}/>
+      </div>
+    </>
+  )
 
 
 

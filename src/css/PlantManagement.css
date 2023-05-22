@@ -76,3 +76,9 @@ form {
 input {
     margin-left: 20px;
 }
+
+.plant-management-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
