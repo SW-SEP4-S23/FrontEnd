@@ -5,54 +5,62 @@ import React, { useState, useEffect } from "react";
 import fetchThresholds from "../services/fetchThresholds";
 import fetchData from "../services/fetchData";
 import ServerFail from "../components/serverFail";
+import postThresholds from "../services/postThresholds";
 
 export default function EnvironmentValues() {
-    const [minValue, setMinValue] = useState(null);
-    const [maxValue, setMaxValue] = useState(null);
-    const [isOkBoxVisible, setIsVisible] = useState(false);
+   const [isOkBoxVisible, setIsVisible] = useState(false);
     const [httpResponseCode, setHttpResponseCode] = useState();
-    const [thresholds, setThresholds] = useState([]);
+    const [currentThresholds, setCurrentThresholds] = useState([]);
     const [currentValues, setCurrentValues] = useState([]);
+    const [newThresholds, setNewThresholds] = useState([]);
     const [serverFail, setServerFail] = useState(false)
 
 
-    async function fetchAverages() {
-        const handleAverage = (data) => {
-            if (data.length === 0) return;
-            const dataName = Object.keys(data[0])[0];
-            const average = data.reduce((total, item) => total + item[dataName], 0) / data.length;
-            setCurrentValues((prev) => [...prev, { [dataName]: average }]);
+    async function fetchCurrentValues() {
+        function handleData(response) {
+            setCurrentValues((prev) =>{
+                return {...prev, [response.name]: response.value}
+            });
         }
-
-        const now = new Date();
-        const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+        
 
         ["temperature", "humidity", "co2"].map((dataName) => {
-            fetchData(dataName, oneHourAgo, now, handleAverage, setServerFail);
+            fetchData(dataName, handleData, setServerFail);
         });
     }
 
     useEffect(() => {
-        fetchThresholds(setThresholds);
-        fetchAverages();
+        //fetchThresholds(setCurrentThresholds, setServerFail);
+        setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
+            )
+        fetchCurrentValues();
     }, []);
 
+    useEffect(() => {
+        setNewThresholds(currentThresholds);
+    }, [currentThresholds]);
 
-    async function setDataValues(dataName) {
-        const response = await fetch(
-            `https://cloud-app-byi2ujnffa-ez.a.run.app/${dataName}?newMin=${minValue}&newMax=${maxValue}`
+
+    function onChange(change) {
+        setNewThresholds((prev) => {
+            const newThresholds = { ...prev };
+            newThresholds[change.name][change.type] = change.value;
+            return newThresholds;
+        }
         );
+    }
 
+    async function onSubmit() {
+
+        postThresholds(newThresholds, setServerFail);
         /*vi tjekker responskode, og hvis den giver 200, skal OkBox lave en grøn boks
         som informerer brugeren om, at de nye værdier er blevet sat*/
-        setHttpResponseCode(response.status);
         setIsVisible(true);
-        console.log(response.status);
     }
 
     return <>
         <div className="environment-values top-container">
-            <SetEnvironmentValue setMinValue={setMinValue} setMaxValue={setMaxValue} minValue={minValue} maxValue={maxValue} setDataValues={setDataValues} thresholds={thresholds} currentValues={currentValues}/>
+            <SetEnvironmentValue newThresholds={newThresholds} onChange={onChange} onSubmit={onSubmit} currentValues={currentValues}/>
             <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}
             {serverFail?<ServerFail setServerFail={setServerFail} serverFail={serverFail}/>:""}        
         </div>

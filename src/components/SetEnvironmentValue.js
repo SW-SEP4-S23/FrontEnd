@@ -5,12 +5,12 @@ import "../utils/maxAndMinValues.js"
 import dataNameToLabel from "../utils/dataNameToLabel.js"
 import maxAndMinValues from "../utils/maxAndMinValues.js"
 
-function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, setDataValues, thresholds, currentValues }) {
+function SetEnvironmentValue({newThresholds, onChange, onSubmit, currentValues }) {
 
-    if (!thresholds || thresholds.length === 0) {
-        thresholds = { temperature: { min: 20, max: 25 }, humidity: { min: 40, max: 60 }, co2: { min: 2, max: 4 } }
+
+    if (newThresholds === undefined || newThresholds?.length === 0) {
+        newThresholds = { temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
     }
-
     if (currentValues === undefined || currentValues?.length === 0) {
         currentValues = { temperature: 22.3, humidity: "62%", co2: "3.2%" }
     }
@@ -30,27 +30,29 @@ function SetEnvironmentValue({ setMinValue, setMaxValue, minValue, maxValue, set
                                         name="min"
                                         type="number"
                                         min= {maxAndMinValues[dataName][0]}
-                                        max={maxValue === null ? maxAndMinValues[dataName][1] : maxValue }
+                                        max={newThresholds[dataName].maxValue < maxAndMinValues[dataName][1] ? newThresholds[dataName].maxValue : maxAndMinValues[dataName][1]}
                                         onKeyDown={(e) => {
                                             e.preventDefault();
                                         }}
-                                        placeholder={thresholds[dataName]?.min} onChange={(event) => setMinValue(event.target.value)} />
+                                        value={newThresholds[dataName].minValue}
+                                        onChange={(event) => onChange({name: dataName, type: "minValue", value: event.target.value})} />
                                     </label>
                                 </div>
                                 <div className="thresholdsinput">
                                     <label>max:<input
                                         name="max"
                                         type="number"
-                                        min={minValue === null ? maxAndMinValues[dataName][0] : minValue }
+                                        min={newThresholds[dataName].minValue > maxAndMinValues[dataName][0] ? newThresholds[dataName].minValue : maxAndMinValues[dataName][0] }
                                         max={maxAndMinValues[dataName][1]}
                                         onKeyDown={(e) => {
                                             e.preventDefault();
                                         }}
-                                        placeholder={thresholds[dataName]?.max} onChange={(event) => setMaxValue(event.target.value)} />
+                                        value={newThresholds[dataName].maxValue}
+                                        onChange={(event) => onChange({name: dataName, type: "maxValue", value: event.target.value })} />
                                     </label>
                                 </div>
                             </div>
-                            <button className="databutton" onClick={() => setDataValues(dataName)}>OK</button>
+                            <button className="databutton" onClick={() => onSubmit()}>OK</button>
                         </div>
                     </div>
 

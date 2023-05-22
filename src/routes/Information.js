@@ -25,7 +25,7 @@ export default function Information() {
     <>
       <div className="dataContainer top-container">
         <DataTabsDisplay
-          data={data}
+          data={data.value}
           setDataName={setDataName}
           setEndDate={setEndDate}
         />
