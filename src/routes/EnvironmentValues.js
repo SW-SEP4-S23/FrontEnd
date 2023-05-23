@@ -15,6 +15,7 @@ export default function EnvironmentValues() {
     const [serverFailMessage, setServerFailMessage] = useState([]);
 
     useEffect(() => {
+        //fetchThresholds({ setData: setCurrentThresholds, setServerFail: setServerFail });
         setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
         )
         fetchData({ setData: setCurrentValues, setServerFail: setServerFail });
