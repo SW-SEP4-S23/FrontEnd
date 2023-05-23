@@ -1,3 +1,6 @@
+//TODO - Flyt knapperne i sit eget component.
+//TODO - Lav eller importer et generisk button component.
+
 import React, { useState } from "react"
 import TimeSelect from "./TimeSelect"
 import DataTable from "./DataTable"

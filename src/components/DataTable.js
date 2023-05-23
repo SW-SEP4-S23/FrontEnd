@@ -1,3 +1,5 @@
+//TODO Lav component mere generisk. lav string manipulation højere oppe, th skal sættes som props også.
+
 import "../css/Data.css"
 import "../css/styles.css"
 import dataNameToLabel from "../utils/dataNameToLabel"
