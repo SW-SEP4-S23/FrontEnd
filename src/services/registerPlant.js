@@ -4,7 +4,7 @@ export default async function registerPlant(state) {
 // TODO: Implement function to contact API and register plant
 alert(state.plantName)
 
-// PATCH request using axios
+// POST request using axios
 const element = document.querySelector('#patch-request .date-updated'); 
 axios.post('https://testapi.jasonwatmore.com/invalid-url', state)     
 .then(response => element.innerHTML = response.data.updatedAt )     
