@@ -1,7 +1,5 @@
-.server-error-message{
+#error-status h1, #succes-status h1{
     text-align: center;
     font-family: "Poppins", sans-serif;
     margin: auto;
-    color: red;
 }
-

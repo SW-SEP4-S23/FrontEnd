@@ -4,36 +4,47 @@
 
 import React from 'react';
 import '@testing-library/jest-dom';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, findAllByRole } from '@testing-library/react';
 import DataTabsDisplay from '../components/DataTabsDisplay';
+import { TabList } from 'react-tabs';
 
 describe('DataTabsDisplay', () => {
 
-  it('renders three tabs', () => {
-    render(<DataTabsDisplay />);
-    const tempTab = screen.getByText('Temperatur');
+  it('renders tabs and selects temperature tab by default', () => {
+    const data = [];
+    const setDataName = jest.fn();
+    const setStartDate = jest.fn();
+
+    render(<DataTabsDisplay data={data} setDataName={setDataName} setStartDate={setStartDate} />);
+
+    // Check if the tabs are rendered
+    const temperatureTab = screen.getByText('Temperatur');
     const humidityTab = screen.getByText('Luftfugtighed');
     const co2Tab = screen.getByText('CO2');
-    expect(tempTab).toBeInTheDocument();
+
+    expect(temperatureTab).toBeInTheDocument();
     expect(humidityTab).toBeInTheDocument();
     expect(co2Tab).toBeInTheDocument();
+
+    // Check if the temperature tab is selected by default
+    expect(temperatureTab).toHaveClass('react-tabs__tab--selected');
+    expect(humidityTab).not.toHaveClass('react-tabs__tab--selected');
+    expect(co2Tab).not.toHaveClass('react-tabs__tab--selected');
   });
 
-  it('clicking on a tab displays the correct data container', () => {
-    render(<DataTabsDisplay setDataName={()=>{}}/>);
-    const tempTab = screen.getByText('Temperatur');
-    fireEvent.click(tempTab);
-    const tempContainer = screen.getByTestId('temperature-container');
-    expect(tempContainer).toBeInTheDocument();
+  it('sets data name when a tab is clicked', () => {
+    const data = [];
+    const setDataName = jest.fn();
+    const setStartDate = jest.fn();
 
+    render(<DataTabsDisplay data={data} setDataName={setDataName} setStartDate={setStartDate} />);
+
+    // Click on the humidity tab
     const humidityTab = screen.getByText('Luftfugtighed');
     fireEvent.click(humidityTab);
-    const humidityContainer = screen.getByTestId('humidity-container');
-    expect(humidityContainer).toBeInTheDocument();
 
-    const co2Tab = screen.getByText('CO2');
-    fireEvent.click(co2Tab);
-    const co2Container = screen.getByTestId('co2-container');
-    expect(co2Container).toBeInTheDocument();
+    // Check if the data name is set correctly
+    expect(setDataName).toHaveBeenCalledWith('humidity');
   });
 });
+

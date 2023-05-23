@@ -56,7 +56,7 @@ function SetEnvironmentValue({newThresholds, onChange, onSubmit, currentValues }
                                     </label>
                                 </div>
                             </div>
-                            <button className="databutton" onClick={() => onSubmit()}>OK</button>
+                            <button className="databutton" onClick={() => onSubmit(dataName, newThresholds[dataName].maxValue, newThresholds[dataName].minValue)}>OK</button>
                         </div>
                     </div>
 

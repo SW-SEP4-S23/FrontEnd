@@ -1,20 +1,18 @@
 import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, ResponsiveContainer } from "recharts"
 import convertTimestamp from "../utils/convertTimestamp"
 import "../css/DataGraph.css"
-import dataNameToLabel from "../utils/dataNameToLabel"
 
 function DataGraph({ data, dataName }) {
 
     data = data && data.map((dataPoint) => {
         return {
             timestamp: convertTimestamp(dataPoint.timestamp),
-            [dataName]: dataPoint[dataName]
+            [dataName]: dataPoint.value
         }
     })
 
     return (
       <div role="graph" className="dataGraphContainer">
-        <h3>{dataNameToLabel(dataName)}</h3>
         {data !== undefined && data.length !== 0 ? (
           <ResponsiveContainer width="95%" height={250}>
             <LineChart

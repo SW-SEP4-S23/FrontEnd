@@ -10,8 +10,8 @@ import DataTable from '../components/DataTable';
 describe('DataTable', () => {
   const modckDataName = 'temperature';
   const mockData = [
-    { id: 1, timestamp: '2023-05-09T12:34:56Z', [modckDataName]: 123 },
-    { id: 2, timestamp: '2023-05-09T12:45:06Z', [modckDataName]: 456 },
+    { id: 1, timestamp: '2023-05-09T12:34:56Z', value: 123 },
+    { id: 2, timestamp: '2023-05-09T12:45:06Z', value: 456 },
   ];
 
   it('renders without crashing', () => {

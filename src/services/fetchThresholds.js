@@ -1,4 +1,4 @@
-async function fetchThresholds(setThresholds) {
+async function fetchThresholds(setThresholds, setServerFail) {
     const response = await fetch(
         `https://cloud-app-byi2ujnffa-ez.a.run.app/thresholds`
     )
@@ -8,6 +8,7 @@ async function fetchThresholds(setThresholds) {
         setThresholds(data)
       }
       else {
-       return ("Server fejl, prøv igen senere.")
+        setServerFail(true)
+        setThresholds([])
       }
     } export default fetchThresholds

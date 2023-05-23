@@ -16,7 +16,6 @@ export default function Information() {
     så rerenders siden, og den korrekte data hentes*/
   useEffect(() => {
     fetchData({dataName: dataName, endDate: endDate, startDate: startDate, setData: setData, setServerFail: setServerFail})
-
     //nedenstående sørger for at fjerne missing dependency warning på [dataName, endDate]
     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataName, startDate])
@@ -27,7 +26,7 @@ export default function Information() {
         <DataTabsDisplay
           data={data}
           setDataName={setDataName}
-          setEndDate={setStartDate}
+          setStartDate={setStartDate}
         />
       </div>
       {serverFail?<ServerFail setServerFail={setServerFail} serverFail={serverFail}/>:""}

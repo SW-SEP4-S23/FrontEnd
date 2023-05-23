@@ -8,8 +8,7 @@ import ServerFail from "../components/serverFail";
 import postThresholds from "../services/postThresholds";
 
 export default function EnvironmentValues() {
-   const [isOkBoxVisible, setIsVisible] = useState(false);
-    const [httpResponseCode, setHttpResponseCode] = useState();
+    const [isOkBoxVisible, setIsVisible] = useState(false);
     const [currentThresholds, setCurrentThresholds] = useState([]);
     const [currentValues, setCurrentValues] = useState([]);
     const [newThresholds, setNewThresholds] = useState([]);
@@ -18,8 +17,8 @@ export default function EnvironmentValues() {
     useEffect(() => {
         //fetchThresholds(setCurrentThresholds, setServerFail);
         setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
-            )
-        fetchData({setData: setCurrentValues, setServerFail: setServerFail});
+        )
+        fetchData({ setData: setCurrentValues, setServerFail: setServerFail });
     }, []);
 
     useEffect(() => {
@@ -28,28 +27,35 @@ export default function EnvironmentValues() {
 
 
     function onChange(change) {
-        setNewThresholds((prev) => {
+         setNewThresholds((prev) => {
             const newThresholds = { ...prev };
             newThresholds[change.name][change.type] = change.value;
             return newThresholds;
-        }
+        } 
         );
     }
 
-    async function onSubmit() {
-
-        postThresholds(newThresholds, setServerFail, setHttpResponseCode);
-        /*vi tjekker responskode, og hvis den giver 200, skal OkBox lave en grøn boks
-        som informerer brugeren om, at de nye værdier er blevet sat*/
-        setHttpResponseCode(200);
-        setIsVisible(true);
+    async function onSubmit(dataName, maxValue, minValue) {
+        try {
+            await postThresholds({ dataName, maxValue, minValue, setIsVisible: setIsVisible, setServerFail: setServerFail });
+        } catch (error) {
+            console.error("Serverfejl", error);
+        }
     }
 
     return <>
         <div className="environment-values top-container">
-            <SetEnvironmentValue newThresholds={newThresholds} onChange={onChange} onSubmit={onSubmit} currentValues={currentValues}/>
-            <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}
-            {serverFail?<ServerFail setServerFail={setServerFail} serverFail={serverFail}/>:""}        
+            <SetEnvironmentValue
+                newThresholds={newThresholds}
+                onChange={onChange}
+                onSubmit={onSubmit}
+                currentValues={currentValues} />
+            {isOkBoxVisible ? <OkBox
+                isOkBoxVisible={isOkBoxVisible}
+                setIsVisible={setIsVisible}/> : ""}
+            {serverFail ? <ServerFail
+                setServerFail={setServerFail}
+                serverFail={serverFail} /> : ""}
         </div>
     </>
 }

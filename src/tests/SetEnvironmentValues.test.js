@@ -6,91 +6,116 @@ import SetEnvironmentValue from "../components/SetEnvironmentValue.js"
 import React from "react"
 import '@testing-library/jest-dom'
 import { render, screen, fireEvent } from "@testing-library/react"
+import dataNameToLabel from "../utils/dataNameToLabel.js"
 
 describe('EnvironmentValues', () => {
+
+  const mockOnChange = jest.fn();
+  const mockOnSubmit = jest.fn();
+
+  const mockThresholds = {
+    temperature: { minValue: 22, maxValue: 25 },
+    humidity: { minValue: 22, maxValue: 25 },
+    co2: { minValue: 22, maxValue: 25 },
+  };
+
+  const mockCurrentValues = [
+    { type: 'temperature', value: 22.3 },
+    { type: 'humidity', value: '62%' },
+    { type: 'co2', value: '3.2%' },
+  ];
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+
   it("renders without crashing", () => {
     render(<SetEnvironmentValue />)
   })
 
+  it('displays the current values correctly', () => {
+    const currentValues = [
+      { type: 'temperature', value: 22.3 },
+      { type: 'humidity', value: '62%' },
+      { type: 'co2', value: '3.2%' },
+    ];
 
-  it('renders the component with default values', () => {
-    render(<SetEnvironmentValue />)
-
-    // Assert that the component renders correctly
-    expect(screen.getByText('Temperatur')).toBeInTheDocument()
-    expect(screen.getByText('Luftfugtighed')).toBeInTheDocument()
-    expect(screen.getByText('CO2')).toBeInTheDocument()
-
-    // Assert that the default values are displayed
-    expect(screen.getByPlaceholderText('20')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('25')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('40')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('60')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('2')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('4')).toBeInTheDocument()
-  })
-
-  it('allows setting new values and triggers the callback', () => {
-    const setDataValuesMock = jest.fn()
-    const setMinValueMock = jest.fn()
-    const setMaxValueMock = jest.fn()
-
-    render(<SetEnvironmentValue
-      setDataValues={setDataValuesMock}
-      setMinValue={setMinValueMock}
-      setMaxValue={setMaxValueMock}
-    />)
-
-    // Enter new values
-    fireEvent.change(screen.getByPlaceholderText('20'), { target: { value: '18' } })
-    fireEvent.change(screen.getByPlaceholderText('25'), { target: { value: '30' } })
-    fireEvent.change(screen.getByPlaceholderText('40'), { target: { value: '35' } })
-    fireEvent.change(screen.getByPlaceholderText('60'), { target: { value: '70' } })
-    fireEvent.change(screen.getByPlaceholderText('2'), { target: { value: '1.5' } })
-    fireEvent.change(screen.getByPlaceholderText('4'), { target: { value: '4.5' } })
-
-    // Assert that the mock functions were called with the correct values
-    expect(setMinValueMock).toHaveBeenCalledTimes(3)
-    expect(setMinValueMock).toHaveBeenCalledWith('18')
-    expect(setMinValueMock).toHaveBeenCalledWith('35')
-    expect(setMinValueMock).toHaveBeenCalledWith('1.5')
-
-    expect(setMaxValueMock).toHaveBeenCalledTimes(3)
-    expect(setMaxValueMock).toHaveBeenCalledWith('30')
-    expect(setMaxValueMock).toHaveBeenCalledWith('70')
-    expect(setMaxValueMock).toHaveBeenCalledWith('4.5')
-
-    // Click the "OK" button
-    const okButtons = screen.getAllByText('OK')
-    okButtons.forEach((button) => {
-      fireEvent.click(button)
-    })
-
-    // Assert that the callback function was called with the correct data
-    expect(setDataValuesMock).toHaveBeenCalledTimes(3)
-    expect(setDataValuesMock).toHaveBeenCalledWith('temperature')
-    expect(setDataValuesMock).toHaveBeenCalledWith('humidity')
-    expect(setDataValuesMock).toHaveBeenCalledWith('co2')
-  })
-
-  it('sets min value correctly', () => {
-    // Create mock functions for the required props
-    const setMinValue = jest.fn();
-    const setMaxValue = jest.fn();
-    const setDataValues = jest.fn();
-
-    const { getByLabelText, getByText } = render(
-      <SetEnvironmentValue
-        setMinValue={setMinValue}
-        setMaxValue={setMaxValue}
-        setDataValues={setDataValues}
-      />
+    render(
+      <SetEnvironmentValue currentValues={currentValues} />
     );
-    // Get the input element for the min value of the first environment value card (temperature)
-    const minInput = getByLabelText('min:');
-    fireEvent.change(minInput, { target: { value: '15' } });
 
-    // Check if the setMinValue function is called with the correct value
-    expect(setMinValue).toHaveBeenCalledWith('15');
-  })
+    currentValues.forEach((dataPoint) => {
+      const value = dataPoint.value;
+      expect(screen.getByText(value)).toBeInTheDocument();
+    });
+  });
+
+  it('calls the onChange function when thresholds input values change', () => {
+    const onChange = jest.fn();
+
+    render(
+      <SetEnvironmentValue onChange={onChange} />
+    );
+
+    const minInput = screen.getAllByLabelText('min:');
+    const maxInput = screen.getAllByLabelText('max:');
+
+    minInput.forEach((min) => {
+      fireEvent.change(min, { target: { value: '20' } });
+    });
+    maxInput.forEach((max) => {
+      fireEvent.change(max, { target: { value: '30' } }
+      )
+    });
+
+    expect(onChange).toHaveBeenCalledTimes(6);
+    expect(onChange).toHaveBeenCalledWith({
+      name: 'temperature',
+      type: 'minValue',
+      value: '20',
+    });
+    expect(onChange).toHaveBeenCalledWith({
+      name: 'temperature',
+      type: 'maxValue',
+      value: '30',
+    });
+    expect(onChange).toHaveBeenCalledWith({
+      name: 'humidity',
+      type: 'minValue',
+      value: '20',
+    });
+    expect(onChange).toHaveBeenCalledWith({
+      name: 'humidity',
+      type: 'maxValue',
+      value: '30',
+    });
+    expect(onChange).toHaveBeenCalledWith({
+      name: 'co2',
+      type: 'minValue',
+      value: '20',
+    });
+    expect(onChange).toHaveBeenCalledWith({
+      name: 'co2',
+      type: 'maxValue',
+      value: '30',
+    });
+  });
+
+
+  it('calls the onSubmit function when OK button is clicked', () => {
+    const onSubmit = jest.fn();
+
+    render(
+      <SetEnvironmentValue onSubmit={onSubmit} />
+    );
+
+    const okButton = screen.getAllByText('OK');
+
+    okButton.forEach((button) => {
+    fireEvent.click(button);})
+
+    expect(onSubmit).toHaveBeenCalledTimes(3);
+
+  });
 })

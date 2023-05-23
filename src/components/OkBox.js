@@ -1,12 +1,12 @@
 import React, { useEffect } from "react"
-import "../css/ServerFail.css"
+import "../css/OkBox.css"
 
-function OkBox({ httpResponseCode, isOkBoxVisible, setIsVisible }) {
+function OkBox({ isOkBoxVisible, setIsVisible }) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsVisible(false)
-        }, 5000)
+        }, 3000)
 
         return () => clearTimeout(timer)
         //nedenstående sørger for at fjerne missing dependency warning på [dataName, endDate]
@@ -15,14 +15,9 @@ function OkBox({ httpResponseCode, isOkBoxVisible, setIsVisible }) {
 
     return (
         <div data-testid={`ok-box`}>
-            {isOkBoxVisible && httpResponseCode === 200 &&
-                <div style={{ color: "green" }}>
-                    <h1 className="server-error-message">Værdierne er sat!</h1>
-                </div>}
-            {isOkBoxVisible && httpResponseCode !== 200 &&
-                <div style={{ color: "red" }}>
-                    <h1 className="server-error-message">Der skete en fejl, prøv igen senere</h1>
-                </div>}
+                <div id="succes-status">
+                    <h1  style={{ color: "green" }}>Gemt</h1>
+                </div>
         </div>
     )
 }

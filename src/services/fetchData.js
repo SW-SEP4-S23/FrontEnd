@@ -10,6 +10,7 @@ async function fetchData({dataName, startDate, endDate, setData, setServerFail})
     if (startDate !== undefined && endDate !== undefined) {
       url += `?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
     }
+    console.log(url)
     const response = await fetch(url)
     console.log(response)
 
