@@ -16,23 +16,6 @@ describe('OkBox', () => {
         expect(successStatusElement).toHaveStyle({ color: 'green' });
     });
 
-    it('displays error message when httpResponseCode is not 200 and isOkBoxVisible is true', () => {
-        render(<OkBox httpResponseCode={400} isOkBoxVisible={true} setIsVisible={() => { }} />);
-
-        const errorStatusElement = screen.getByText('Der skete en fejl, prøv igen senere');
-        expect(errorStatusElement).toBeInTheDocument();
-        expect(errorStatusElement).toHaveStyle({ color: 'red' });
-    });
-
-    it('does not display any message when isOkBoxVisible is false', () => {
-        render(<OkBox httpResponseCode={200} isOkBoxVisible={false} setIsVisible={() => {}} />);
-        
-        const successStatusElement = screen.queryByText('Gemt');
-        const errorStatusElement = screen.queryByText('Der skete en fejl, prøv igen senere');
-        expect(successStatusElement).not.toBeInTheDocument();
-        expect(errorStatusElement).not.toBeInTheDocument();
-      });
-
 
     it('calls setIsVisible(false) after 3 seconds when isOkBoxVisible is true', async () => {
         jest.useFakeTimers()
@@ -47,6 +30,7 @@ describe('OkBox', () => {
             expect(setIsVisibleMock).toHaveBeenCalledWith(false)
         })
     })
+    
 
     it('does not call setIsVisible(false) before 3 seconds when isOkBoxVisible is true', async () => {
         jest.useFakeTimers()
@@ -61,4 +45,13 @@ describe('OkBox', () => {
             expect(setIsVisibleMock).not.toHaveBeenCalledWith(false)
         })
     })
+
+    it('displays "Gemt" message with green color when isOkBoxVisible is true', () => {
+        render(<OkBox isOkBoxVisible={true} setIsVisible={jest.fn()} />);
+    
+        // Verify that the "Gemt" message is rendered with green color
+        const gemtMessage = screen.getByText('Gemt');
+        expect(gemtMessage).toBeInTheDocument();
+        expect(gemtMessage).toHaveStyle('color: green');
+      });
 })

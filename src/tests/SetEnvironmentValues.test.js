@@ -10,25 +10,6 @@ import dataNameToLabel from "../utils/dataNameToLabel.js"
 
 describe('EnvironmentValues', () => {
 
-  const mockOnChange = jest.fn();
-  const mockOnSubmit = jest.fn();
-
-  const mockThresholds = {
-    temperature: { minValue: 22, maxValue: 25 },
-    humidity: { minValue: 22, maxValue: 25 },
-    co2: { minValue: 22, maxValue: 25 },
-  };
-
-  const mockCurrentValues = [
-    { type: 'temperature', value: 22.3 },
-    { type: 'humidity', value: '62%' },
-    { type: 'co2', value: '3.2%' },
-  ];
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
 
   it("renders without crashing", () => {
     render(<SetEnvironmentValue />)

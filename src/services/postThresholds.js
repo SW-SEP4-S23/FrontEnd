@@ -1,6 +1,5 @@
-import ServerFail from "../components/serverFail";
 
-export default async function postThresholds({ dataName, maxValue, minValue, setIsVisible, setServerFail}) {
+export default async function postThresholds(dataName, maxValue, minValue, setIsVisible, setServerFail, setServerFailMessage) {
     // POST request using fetch with error handling
     const requestOptions = {
         method: 'POST',
@@ -12,9 +11,12 @@ export default async function postThresholds({ dataName, maxValue, minValue, set
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
+            
+            console.log("minvalue = "+ minValue + " maxvalue = " + maxValue)
 
             if(response.ok)
             {
+                setServerFailMessage([])
                 setIsVisible(true)
                 console.log("Posted succesfully")
             }
@@ -31,5 +33,7 @@ export default async function postThresholds({ dataName, maxValue, minValue, set
         })
         .catch(error => {
             console.error('Serverfejl', error);
+            setServerFailMessage(error)
+            console.log(error)
         }); 
 }
