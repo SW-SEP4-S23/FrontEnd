@@ -1,4 +1,5 @@
 import "../css/PlantManagement.css";
+import "../css/PlantContainer.css"
 import "../css/Data.css"
 import StockTable from "./StockTable";
 
@@ -14,10 +15,11 @@ function PlantContainer({ onButtonClick, data, onSearch }) {
               placeholder="Søg efter plante.."
             ></input>
             <button className="databutton">Søg</button>
+            </div>
             <button className="databutton" id="PlantEdit" onClick={() => onButtonClick("edit")}>
               Rediger
             </button>
-          </div>
+          
         </div>
         <div id="PlantData">
           <StockTable data={data} />

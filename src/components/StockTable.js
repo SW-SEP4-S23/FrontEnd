@@ -1,5 +1,7 @@
 import "../css/Data.css"
 import "../css/styles.css"
+import "../css/PlantManagement.css"
+import "../css/StockTable.css"
 import "../utils/dataNameToLabel.js"
 
 export default function StockTable({data}) {
@@ -31,7 +33,7 @@ export default function StockTable({data}) {
 
     return (
         <>
-            <table>
+            <table id="stock-table">
                 <tbody className="green-table">
                     <tr>
                     <th>Plantenavn</th>
