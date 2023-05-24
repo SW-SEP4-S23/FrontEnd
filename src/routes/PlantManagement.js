@@ -9,6 +9,14 @@ export default function PlantManagement(){
   useEffect(() => {
     fetchPlants(setData)
   },[]);
+
+  function onSearch(value) 
+  {
+    const result = data.filter((item) => {
+      return item.name.toLowerCase().includes(value.toLowerCase());
+    });
+    setData(result);
+  }
   
 
     return (
@@ -16,7 +24,7 @@ export default function PlantManagement(){
 <div id = "PlantCard">
 <div id = "PlantHeader">
     <h1> Plantebeholdning</h1>
-    <div  id = "PlantSearch"><textarea placeholder="Søg efter plante.."></textarea> 
+    <div  id = "PlantSearch"><input onChange={(e)=> onSearch(e.target.value)} placeholder="Søg efter plante.."></input> 
     <button>Søg</button></div>
 
 </div>
