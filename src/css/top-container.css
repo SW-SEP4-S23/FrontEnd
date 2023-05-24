@@ -1,0 +1,33 @@
+.top-container {
+    width: 100vw;
+    height: 70vh;
+    position: relative;
+    max-width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  .top-container::before {
+    content: "";
+    position: absolute;
+    background-image: url("../images/flowers-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    filter: brightness(40%);
+    z-index: -1;
+  }
+    
+  @media only screen and (min-width: 1200px) {
+    .top-container::before {
+      background-image: url("../images/flowers-background.jpg");
+      height: 70vh;
+    }
+  }
+  

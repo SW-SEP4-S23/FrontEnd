@@ -1,64 +1,33 @@
 
-html{
-    margin: none;
-    padding: none;
-    display: flex;
-    align-content: flex-start;
-    font-size: 10px;
-    background-color: rgb(245 , 252, 208);
-    /* Set the background image */
-    background-image: url("../images/greenhouse.png");
+
+#root{
+    background-color: rgb(208, 252, 213);
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-#root{
-    background-color:rgb(245 , 252, 208);
-    background-image: url("../images/greenhouse.png");
-    background-repeat: no-repeat;
-    background-size: cover;
+html{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-content: flex-start;
+    font-size: 10px;
+    background-color: rgb(208, 252, 213);
 }
 
 body{
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 100vw;
     font-size: 1.6rem;
-    background-color: transparent; /* Remove the background color */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
-
-
-nav {
-    font-size: 2rem;
-}
-
-
-#frontpage-greeting{
-    margin-top: 10%;
-    font-weight: bold;
-    font-size: 600%;
-    color: #eeeeee;
-    text-align: center;
-    font-family: 'Lucida Handwriting', cursive;
-    text-shadow: 0 -2px 20px rgba(19, 55, 49, 0.59),
-    0 0 30px #21221e,
-    0 0 40px #29163d;
-}
-
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     html{
-        background: url("../images/greenhouseSmall.jpg"),rgb(245 , 252, 208);
-        background-size: cover;   
-        background-repeat: no-repeat;
+
     }
     #root{
-        background-color: rgb(245 , 252, 208);
-        background-image: url("../images/greenhouseSmall.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    #frontpage-greeting{
-        font-size: 200%;
+
     }
   }

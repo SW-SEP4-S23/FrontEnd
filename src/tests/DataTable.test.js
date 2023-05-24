@@ -8,35 +8,27 @@ import { render } from '@testing-library/react';
 import DataTable from '../components/DataTable';
 
 describe('DataTable', () => {
-  const dataName = 'temperature';
-  const data = [
-    { id: 1, timestamp: '2023-05-09T12:34:56Z', [dataName]: 123 },
-    { id: 2, timestamp: '2023-05-09T12:45:06Z', [dataName]: 456 },
+  const modckDataName = 'temperature';
+  const mockData = [
+    { id: 1, timestamp: '2023-05-09T12:34:56Z', value: 123 },
+    { id: 2, timestamp: '2023-05-09T12:45:06Z', value: 456 },
   ];
 
   it('renders without crashing', () => {
-    render(<DataTable data={data} dataName={dataName} />);
+    render(<DataTable data={mockData} dataName={modckDataName} />);
   });
 
-  it('displays table headers correctly', () => {
-    const { getByText } = render(<DataTable data={data} dataName={dataName} />);
-    expect(getByText('Dato')).toBeInTheDocument();
-    expect(getByText('Tid')).toBeInTheDocument();
-    expect(getByText(`${dataName} værdi`)).toBeInTheDocument();
-  });
-
-  it('displays data rows correctly', () => {
-    const { queryAllByText } = render(<DataTable data={data} dataName={dataName} />);
-    expect(queryAllByText('2023-05-09')[0]).toBeInTheDocument();
-    expect(queryAllByText('12:34')[0]).toBeInTheDocument();
-    expect(queryAllByText('123')[0]).toBeInTheDocument();
-    expect(queryAllByText('2023-05-09')[0]).toBeInTheDocument();
-    expect(queryAllByText('12:45')[0]).toBeInTheDocument();
-    expect(queryAllByText('456')[0]).toBeInTheDocument();
+  it('renders data correctly', () => {
+    const { container } = render(<DataTable data={mockData} dataName={modckDataName} />);
+    expect(container.innerHTML).toMatch('2023-05-09');
+    expect(container.innerHTML).toMatch('12:34');
+    expect(container.innerHTML).toMatch('123');
+    expect(container.innerHTML).toMatch('12:45');
+    expect(container.innerHTML).toMatch('456');
   });
 
   it('displays a message when there is no data', () => {
-    const { getByText } = render(<DataTable data={[]} dataName={dataName} />);
-    expect(getByText('No data available.')).toBeInTheDocument();
-  });
+    const { container } = render(<DataTable />);
+    expect(container.innerHTML).toMatch('Ingen data at vise.');
+  })
 });

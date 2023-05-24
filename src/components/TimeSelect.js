@@ -1,46 +1,48 @@
-function TimeSelect({ setEndDate }) {
+function TimeSelect({ setStartDate }) {
 
     const handleDateSelect = (event) => {
         const value = event.target.value
 
+        if (value === "") return
+
         //switch som giver korrekt tidspunkt ift. dagsdato
         switch (value) {
             case 'This Year':
-                setEndDate(new Date(new Date().getFullYear(), 0, 1))
+                setStartDate(new Date(new Date().getFullYear(), 0, 1))
                 break
             case 'Last Year':
-                setEndDate(new Date(new Date().getFullYear() - 1, 0, 1))
+                setStartDate(new Date(new Date().getFullYear() - 1, 0, 1))
                 break
             case 'This Quarter':
                 const thisQuarter = Math.floor((new Date().getMonth() + 3) / 3)
-                setEndDate(new Date(new Date().getFullYear(), 3 * thisQuarter - 3, 1))
-                break;
+                setStartDate(new Date(new Date().getFullYear(), 3 * thisQuarter - 3, 1))
+                break
             case 'Last Quarter':
                 const lastQuarter = Math.floor((new Date().getMonth() + 3) / 3) - 1
-                setEndDate(new Date(new Date().getFullYear(), 3 * lastQuarter - 3, 1))
+                setStartDate(new Date(new Date().getFullYear(), 3 * lastQuarter - 3, 1))
                 break
             case 'This Month':
-                setEndDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1))
+                setStartDate(new Date(new Date().getFullYear(), new Date().getMonth(), 1))
                 break
             case 'Last Month':
-                setEndDate(new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1))
+                setStartDate(new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1))
                 break
             case 'This Week':
                 const firstDayOfWeek = new Date().getDate() - new Date().getDay()
-                setEndDate(new Date(new Date().getFullYear(), new Date().getMonth(), firstDayOfWeek))
+                setStartDate(new Date(new Date().getFullYear(), new Date().getMonth(), firstDayOfWeek))
                 break
             default:
-                setEndDate(null)
+                setStartDate(null)
                 break
             case 'Today':
-                setEndDate(new Date())
+                setStartDate(new Date())
                 break
         }
     }
 
     return (<>
 
-        <div role={`TimeSelect`}>
+        <div>
             <select onChange={handleDateSelect}>
                 <option value="">Vælg tidsinterval</option>
                 <option value="Today">Idag</option>
