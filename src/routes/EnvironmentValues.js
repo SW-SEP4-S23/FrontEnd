@@ -2,57 +2,64 @@ import OkBox from "../components/OkBox";
 import "../css/EnvironmentValues.css"
 import SetEnvironmentValue from "../components/SetEnvironmentValue";
 import React, { useState, useEffect } from "react";
-import fetchThresholds from "../services/fetchThresholds";
 import fetchData from "../services/fetchData";
+import ServerFail from "../components/serverFail";
+import postThresholds from "../services/postThresholds";
 
 export default function EnvironmentValues() {
-    const [dataName, setDataName] = useState("temperature");
-    const [minValue, setMinValue] = useState();
-    const [maxValue, setMaxValue] = useState();
     const [isOkBoxVisible, setIsVisible] = useState(false);
-    const [httpResponseCode, setHttpResponseCode] = useState();
-    const [thresholds, setThresholds] = useState([]);
+    const [currentThresholds, setCurrentThresholds] = useState([]);
     const [currentValues, setCurrentValues] = useState([]);
-
-//TODO - opdater til at bruge nyt endpoint fra backend, se interface contract på drev
-    async function fetchAverages() {
-        const handleAverage = (data) => {
-            if (data.length === 0) return;
-            const dataName = Object.keys(data[0])[0];
-            const average = data.reduce((total, item) => total + item[dataName], 0) / data.length;
-            setCurrentValues((prev) => [...prev, { [dataName]: average }]);
-        }
-
-        const now = new Date();
-        const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-
-        ["temperature", "humidity", "co2"].map((dataName) => {
-            fetchData(dataName, oneHourAgo, now, handleAverage);
-        });
-    }
+    const [newThresholds, setNewThresholds] = useState([]);
+    const [serverFail, setServerFail] = useState(false);
+    const [serverFailMessage, setServerFailMessage] = useState([]);
 
     useEffect(() => {
-        fetchThresholds(setThresholds);
-        fetchAverages();
+        //fetchThresholds({ setData: setCurrentThresholds, setServerFail: setServerFail });
+        setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
+        )
+        fetchData({ setData: setCurrentValues, setServerFail: setServerFail });
     }, []);
 
+    useEffect(() => {
+        setNewThresholds(currentThresholds);
+    }, [currentThresholds]);
 
-    async function setDataValues(dataName) {
-        const response = await fetch(
-            `https://cloud-app-byi2ujnffa-ez.a.run.app/${dataName}?newMin=${minValue}&newMax=${maxValue}`
+
+
+    function onChange(change) {
+        setNewThresholds((prev) => {
+            const newThresholds = { ...prev };
+            newThresholds[change.name][change.type] = change.value;
+            return newThresholds;
+        }
         );
+    }
 
-        /*vi tjekker responskode, og hvis den giver 200, skal OkBox lave en grøn boks
-        som informerer brugeren om, at de nye værdier er blevet sat*/
-        setHttpResponseCode(response.status);
-        setIsVisible(true);
-        console.log(response.status);
+    async function onSubmit(dataName, maxValue, minValue) {
+        try {
+            await postThresholds(dataName, maxValue, minValue, setIsVisible, setServerFail, setServerFailMessage);
+        } catch (error) {
+            console.error("Serverfejl", error);
+        }
     }
 
     return <>
-        <div className="environment-values">
-            <SetEnvironmentValue setDataName={setDataName} setMinValue={setMinValue} setMaxValue={setMaxValue} setDataValues={setDataValues} thresholds={thresholds} currentValues={currentValues}/>
-            <OkBox httpResponseCode={httpResponseCode} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible} /> {/* skal kun være synlig hvis responskode er 200*/}        
+        <div className="environment-values top-container">
+            <SetEnvironmentValue
+                newThresholds={newThresholds}
+                onChange={onChange}
+                onSubmit={onSubmit}
+                currentValues={currentValues} />
+        </div>
+        <div>
+            {isOkBoxVisible ? <OkBox
+                isOkBoxVisible={isOkBoxVisible}
+                setIsVisible={setIsVisible} /> : ""}
+            {serverFail ? <ServerFail
+                setServerFail={setServerFail}
+                serverFail={serverFail}
+                serverFailMessage={serverFailMessage} /> : ""}
         </div>
     </>
 }

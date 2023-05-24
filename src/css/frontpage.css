@@ -1,0 +1,122 @@
+h1 {
+  width: 40vw;
+  position: relative;
+  color: white;
+  margin-top: 5vh;
+  font-family: "Lucida Handwriting";
+}
+h4 {
+  position: relative;
+  color: white;
+  width: 60vw;
+  font-family: "Maiandra GD";
+}
+
+.frontpage-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  text-align: center;
+}
+
+#frontpage-logo {
+  width: 10vw;
+  height: autos;
+}
+
+.more-information {
+  height: 80vhvh;
+  display: flex;
+  justify-content: center;
+  font-family: "Maiandra GD";
+  font-weight: 900;
+  margin-top: 8vh;
+}
+
+.circle-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.circle-div {
+  text-align: center;
+  margin: 5vw;
+  margin-top: 0vh;
+}
+
+.circle-image {
+  width: 130px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.info-text{
+  width: 10vw;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+}
+
+@media only screen and (max-width: 1200px) {
+  .info-text{
+    width: 20vw;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #frontpage-logo {
+    width: 20vw;
+    height: auto;
+  }
+  h1 {
+    width: 70vw;
+  }
+  .circle-div {
+    flex-basis: 100%;
+  }
+}
+
+@media only screen and (max-width: 643px) {
+  #frontpage-logo {
+    width: 20vw;
+    height: auto;
+  }
+  h1 {
+    width: 100vw;
+  }
+  body{
+    height: 160vh;
+  }
+  .more-information {
+    padding-top: 10vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 0;
+  }
+  .info-text{
+    width: 30vw;
+    margin: auto;
+  }
+}
+
+@media only screen and (max-width: 415px) {
+  #frontpage-logo {
+    width: 30vw;
+    height: autos;
+  }
+  h1 {
+    width: 100vw;
+  }
+
+  .frontpage-container.top-container {
+    height: 100vh;
+  }
+
+  body{
+    height: 200vh;
+  }
+}
