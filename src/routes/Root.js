@@ -3,6 +3,7 @@ import "../css/navbar.css"
 import { Link, Outlet } from "react-router-dom"
 import { useState } from "react"
 import logo from "../images/logo.PNG"
+import dropdown from "../images/dropdown-logo.png"
 
 export default function App() {
 
@@ -22,7 +23,7 @@ export default function App() {
                         </Link>
                     </div>
                     <div className="menu-icon" onClick={handleShowNavbar}>
-                        - {/*Mangler et dropdown logo her*/}
+                        <img id="dropdown-logo-image" src={dropdown} alt="Dropdown Logo" />
                     </div>
                     <div className={`nav-elements  ${showNavbar && 'active'}`}>
                         <ul>

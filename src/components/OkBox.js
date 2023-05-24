@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react"
+import "../css/OkBox.css"
 
-function OkBox({ httpResponseCode, isOkBoxVisible, setIsVisible }) {
+function OkBox({ isOkBoxVisible, setIsVisible }) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setIsVisible(false);
-        }, 5000);
+            setIsVisible(false)
+        }, 3000)
 
-        return () => clearTimeout(timer);
-    }, [isOkBoxVisible]);
+        return () => clearTimeout(timer)
+        //nedenstående sørger for at fjerne missing dependency warning på [dataName, endDate]
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOkBoxVisible])
 
     return (
         <div data-testid={`ok-box`}>
-            {isOkBoxVisible && httpResponseCode === 200 && <div style={{color: "green"}}>Gemt!</div>}
-            {isOkBoxVisible && httpResponseCode !== 200 && <div style={{color: "red"}}>Der skete en fejl, prøv igen senere</div>}
+                <div id="succes-status">
+                    <h1  style={{ color: "green" }}>Gemt</h1>
+                </div>
         </div>
-    );
+    )
 }
 
 
-export default OkBox;
+export default OkBox

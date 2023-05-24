@@ -4,32 +4,33 @@
   padding: 0;
   margin: 0;
 }
- 
-/* Style DataTabsDisplay.js wrapper */
+
+
 .Data {
   width: 100vw;
+  height: 100%;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  margin-top: 10vh;
 }
- 
+
 /* Tab Container */
 .Tabs {
   width: 80%;
-  height: auto;
-  min-height: 400px;
-  background: RGB(208, 221, 252, 0.9);
+  height: 80vh;
+  background: rgba(255, 255, 255, 0.7);
   margin: 3.5rem auto 1.5rem;
   padding: 2rem 1rem;
   margin-top: 5%;
-  color: #404040;
+  color: #242b25;
   border-radius: 2rem;
+  overflow:auto;
 }
- 
-.react-tabs {
-  -webkit-tap-highlight-color: transparent;
+
+.recharts-surface{
+  padding: 1rem;
 }
- 
+
 .react-tabs__tab-list {
   width: 70%;
   margin: 0 auto 2rem;
@@ -40,7 +41,7 @@
   border-radius: 2rem;
   padding-left: 0px;
 }
- 
+
 .react-tabs__tab {
   width: 50%;
   padding: 1rem;
@@ -49,51 +50,72 @@
   cursor: pointer;
   transition: all 0.7s;
 }
- 
+
 .react-tabs__tab--selected {
-  background: #39A2DB;
-  color: #E8F0F2;
+  background: #70c7aa;
+  color: #e8f0f2;
 }
- 
+
 .react-tabs__tab--disabled {
   color: gray;
   cursor: default;
 }
- 
+
 .react-tabs__tab:hover {
   background: rgba(50, 224, 196, 0.15);
 }
- 
+
 .react-tabs__tab:first-child {
   border-bottom-left-radius: 2rem;
   border-top-left-radius: 2rem;
 }
- 
+
 .react-tabs__tab:last-child {
   border-bottom-right-radius: 2rem;
   border-top-right-radius: 2rem;
 }
- 
-.react-tabs__tab-panel {
-  display: none;
-}
- 
+
+
 .react-tabs__tab-panel--selected {
   display: flex;
   font-size: 2rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
 }
 
-tbody {
-  display: table-row-group;
-  vertical-align: middle;
-  border-color: inherit;
+.databutton{
+
+  background-color: #c2fbd7;
+  width: 100px;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: rgb(2, 51, 2);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
+
+.databutton:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+
 
 @media only screen and (max-width: 767px) {
+  .Data{
+    margin-top: 20vh;
+  }
+
   .react-tabs__tab-list {
     flex-direction: column;
     align-items: center;
@@ -106,21 +128,49 @@ tbody {
   }
 }
 
+@media only screen and (max-width: 400px) {
+  .Data{
+    font-size: small;
+    height: 95vh;
+    margin-top: 35vh ;
+  }
+  .Tabs{
+    margin-top: 5vh;
+    height: 90%;
+  }
+
+  p{
+    font-size: small;
+  }
+  .react-tabs__tab-list {
+    width: 70%;
+    margin: 0 auto 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #184259;
+    border-radius: 2rem;
+    padding-left: 0px;
+  }
+
+}
 
 /*-------------datacontainer*/
 
-.datacontainer{
+.datacontainer {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
-.displayContainer{
+
+
+.displayContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  justify-items:  center;
+  justify-items: center;
 }
 
 .graf-box {
@@ -129,10 +179,11 @@ tbody {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  justify-items:  center;
+  justify-items: center;
 }
 
-td, th {
+td,
+th {
   text-align: center;
   border: 1px solid #000000;
 }
@@ -144,6 +195,43 @@ table {
   margin: 1rem auto;
 }
 
-.graph {
+/*----------------Top container-------------------*/
+
+.dataContainer.top-container::before {
+  background-image: url("../images/flowers-background.jpg");
+  height: 100vh;
+  position: fixed;
+}
+
+/*----------Table--------------*/
+
+.green-table {
   width: 100%;
+  border-collapse: collapse;
+}
+
+.green-table th {
+  background-color: #70c7aa;
+  color: white;
+  padding: 8px;
+  text-align: left;
+}
+
+.green-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.green-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.green-table tr:hover {
+  background-color: #ddd;
+}
+
+.green-table td[colspan="3"] {
+  background-color: #f2f2f2;
+  text-align: center;
+  font-style: italic;
 }

@@ -1,0 +1,156 @@
+.environmentValueCard {
+  width: 30vw;
+  margin: 1rem;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  min-width: 20rem;
+}
+
+.setEnvironmentValueDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  display: inherit;
+  align-items: center;
+  justify-self: center;
+  margin-top: 10vh;
+}
+
+#data-name{
+  color: rgb(55, 164, 113);
+}
+
+@media screen and (max-width: 750px) {
+  .setEnvironmentValueDiv {
+    flex-direction: column;
+  }
+}
+
+.thresholdsinputs {
+    display : flex;
+    flex-direction: column;
+
+}
+
+.thresholdsinputs input{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+
+}
+
+.thresholdsinput
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.thresholdsinput p {
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    opacity: 0.8;
+}
+
+.thresholdsinputs p.currentValue{
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    font-size: 3rem;
+}
+
+p.valueName{
+    text-transform: capitalize;
+    font-size: 1.8rem;
+}
+
+button {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 50px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    background-color: #ebebeb;
+    cursor: pointer;
+}
+
+input:hover{
+  cursor: inherit;
+}
+
+input{
+  caret-color: transparent;
+}
+
+@media only screen and (max-width: 1200px) {
+}
+
+@media only screen and (max-width: 768px) {
+  .setEnvironmentValueDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:60vh;
+    width: 50vw;
+  }
+  .environmentValueCard{
+    width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 643px) {
+  .setEnvironmentValueDiv{
+    margin-top: 90vw;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .setEnvironmentValueDiv{
+    margin-top: 100vw;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .setEnvironmentValueDiv{
+    width: 70vw;
+    margin-top: 130vw;
+  }
+  .environmentValueCard{
+    width: 70vw;
+  }
+}
+
+@media only screen and (max-width: 450px) and (max-height: 700px) {
+  .setEnvironmentValueDiv{
+    width: 95vw;
+    margin-top: 90vh;
+  }
+  .environmentValueCard{
+    width: 95vw;
+  }
+}
+
+
+
