@@ -9,14 +9,13 @@ import StockTable from '../components/StockTable';
 import fetchPlants from '../services/fetchPlants';
 import postBatch from '../services/postBatch';
 import fetchBathes from '../services/fetchBatches';
+import Logbook from '../components/Logbook';
+import fetchLogs from '../services/fetchLogs';
 //import ServerFail from "../components/ServerFail";
 
 export default function PlantManagement() {
-  const testPlants = [
-    { plantName: "Tomat", optimalTemp: "20", optimalHumidity: "50", optimalCo2: "1000", stock: "10", },
-    { plantName: "Agurk", optimalTemp: "23", optimalHumidity: "70", optimalCo2: "573", stock: "12", },
-    { plantName: "Kartoffel", optimalTemp: "15", optimalHumidity: "40", optimalCo2: "1000", stock: "5", },
-  ];
+
+  const [isOkBoxVisible, setIsVisible] = useState(false);
   const [state, setState] = useState({ plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "", });
   const [formToggle, setFormToggle] = useState(false);
   const [errors, setErrors] = useState({ plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "", });
@@ -24,14 +23,21 @@ export default function PlantManagement() {
 	const [formTitle, setFormTitle] = useState('');
 	const [data, setData] = useState([]);
   const [mode, setMode] = useState(null);
-
-  useEffect(() => {
-    setPlantOptions(testPlants);
-    fetchPlants(setData);
-  }, []);
 	const [batches, setBatches] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
+  const [isLogbookOpen, setIsLogbookOpen] = useState(false);
 	//const [serverFail, setServerFail] = useState([]);
+
+  useEffect(() => {
+    fetchPlants(setData);
+  }, []);
+
+  useEffect(() => {
+    setFilteredData(data);
+    setPlantOptions(data)
+  }, [data]);
+
+
 
   function onChange(e) {
     const target = e.target;
@@ -75,9 +81,16 @@ export default function PlantManagement() {
     }
 
     if (mode === "register") {
-      registerPlant(state);
+      //registerPlant(state);
+      setData((prevState) => [...prevState, {id:22, plantName: state.plantName, optimalTemp: state.optimalTemp, optimalHumidity: state.optimalHumidity, optimalCo2: state.optimalCo2, stock: state.stock}]);
     } else if (mode === "edit") {
-      editPlant(state);
+      //editPlant(state);
+      setData((prevState) => prevState.map((plant) => {
+        if (plant.plantName === state.plantName) {
+          return {plantName: state.plantName, optimalTemp: state.optimalTemp, optimalHumidity: state.optimalHumidity, optimalCo2: state.optimalCo2, amount: state.stock };
+        }
+        return plant;
+      }));
     }
 
     setState({
@@ -108,10 +121,6 @@ export default function PlantManagement() {
 
 
 	useEffect(() => {
-		setPlantOptions(testPlants);
-	}, []);
-
-	useEffect(() => {
 
 		function handleData(data)
 		{
@@ -120,7 +129,7 @@ export default function PlantManagement() {
 			data.forEach(plant => {
 				const speciesBatches = batches.filter((batch) => batch.speciesId === plant.id);
 				const plantAmount = speciesBatches.reduce((acc, batch) => acc + batch.amount, 0);
-				plant.amount = plantAmount;
+				plant.stock = plantAmount;
 			});
 			console.log(data)
 			setData(data)
@@ -138,7 +147,7 @@ export default function PlantManagement() {
 
   function onSearch(value) {
     const result = data.filter((item) => {
-      return item.name.toLowerCase().includes(value.toLowerCase());
+      return item.plantName.toLowerCase().includes(value.toLowerCase());
     });
     setFilteredData(result);
   }
@@ -146,14 +155,26 @@ export default function PlantManagement() {
 function onAmountChange(value, id) {
 	const newData = data.map((item) => {
 		if (item.id === id) {
-			item.amount = value;
+			item.stock = value;
 		}
 		return item;
 	});
 	setData(newData);
 }
 
+const [logbookData, setLogbookData] = useState([
+  {date: "2021-02-05", message: "Plante oprettet" },
+  {date: "2021-05-06", message: "Plante vandet" },
+  {date: "2021-08-07", message: "Plante har insekter" },
+  {date: "2021-09-08", message: "Plante har frugt" },
+  {date: "2021-010-09", message: "Plante er død" },]);
+function openLogbook(id) {
+  setIsLogbookOpen(true);
+}
 
+function logNewMessage(message) {
+  setLogbookData((prev) => [...prev, {date: "2023-05-25", message: message}]);
+}
   /*useEffect(() => {
     async function fetchData() {
       const options = await fetchPlants();
@@ -165,7 +186,7 @@ function onAmountChange(value, id) {
   return (
     <>
       <div className="plant-management-container top-container">
-        <PlantContainer data={filteredData} onButtonClick={openForm} onSearch={onSearch} onAmountChange={onAmountChange}/>
+        <PlantContainer data={filteredData} onButtonClick={openForm} onSearch={onSearch} onAmountChange={onAmountChange} openLogbook={openLogbook}/>
       </div>
         <div>
           <PlantRegister
@@ -180,6 +201,7 @@ function onAmountChange(value, id) {
             toggleForm={formToggle}
           />
         </div>
+        {isLogbookOpen ? <Logbook setIsLogbookOpen={setIsLogbookOpen} logMessages={logbookData} logNewMessage={logNewMessage} httpResponseCode={"200"} isOkBoxVisible={isOkBoxVisible} setIsVisible={setIsVisible}/> : null}
     </>
   );
 }

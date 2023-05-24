@@ -5,7 +5,7 @@ import "../css/StockTable.css"
 import "../utils/dataNameToLabel.js"
 import Amount from "../components/Amount"
 
-export default function StockTable({data, onChange, handleButtonClick}) {
+export default function StockTable({data, onChange, handleButtonClick, openLogbook}) {
 
      if (data === undefined || data === null || data.length === 0)
     data = [
@@ -52,12 +52,12 @@ export default function StockTable({data, onChange, handleButtonClick}) {
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.name}</td>
-                                <td>{item.optTemp}</td>
-                                <td>{item.optHumidity}</td>
-                                <td>{item.optCo2}</td>
-                                <td><button>Se logbog</button></td>
-                                <td><input type={"number"} value={item.amount} onChange={(e)=> onChange(e.target.value, item.id)}/></td>
+                                <td>{item.plantName}</td>
+                                <td>{item.optimalTemp}</td>
+                                <td>{item.optimalHumidity}</td>
+                                <td>{item.optimalCo2}</td>
+                                <td><button onClick={()=> openLogbook(item.id)}>Se logbog</button></td>
+                                <td><input type={"number"} value={item.stock} onChange={(e)=> onChange(e.target.value, item.id)}/></td>
                                 <td><button onClick={()=> handleButtonClick("edit")}>Rediger</button></td>
                             </tr>
                         )

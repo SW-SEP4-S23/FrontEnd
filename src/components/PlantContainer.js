@@ -3,7 +3,7 @@ import "../css/PlantContainer.css"
 import "../css/Data.css"
 import StockTable from "./StockTable";
 
-function PlantContainer({ onButtonClick, data, onSearch, onAmountChange, onAmountSubmit }) {
+function PlantContainer({ onButtonClick, data, onSearch, onAmountChange, onAmountSubmit, openLogbook}) {
   return (
     <>
       <div id="PlantCard">
@@ -23,7 +23,10 @@ function PlantContainer({ onButtonClick, data, onSearch, onAmountChange, onAmoun
         </div>
         <div id="PlantData">
           <StockTable data={data}
-          onChange={onAmountChange} onSubmit={onAmountSubmit} />
+          onChange={onAmountChange}
+          onSubmit={onAmountSubmit}
+          openLogbook={openLogbook}
+          handleButtonClick={onButtonClick} />
         </div>
         <div id="PlantFooter">
           <button id="PlantReg" className="databutton" onClick={() => onButtonClick("register")}>

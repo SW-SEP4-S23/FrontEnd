@@ -3,35 +3,35 @@ async function fetchPlants(setPlants)
     setPlants([
         {
             id: 1,
-            name: "Tomat",
-            optCo2: 400,
-            optHumidity: 50,
-            optTemp: 20,
-            amount: 0
+            plantName: "Tomat",
+            optimalCo2: 400,
+            optimalHumidity: 50,
+            optimalTemp: 20,
+            stock: 0
         },
         {
             id: 2,
-            name: "Basillikum",
-            optCo2: 400,
-            optHumidity: 50,
-            optTemp: 20,
-            amount: 0
+            plantName: "Basillikum",
+            optimalCo2: 400,
+            optimalHumidity: 50,
+            optimalTemp: 20,
+            stock: 0
         },
         {
             id: 3,
-            name: "Agurk",
-            optCo2: 400,
-            optHumidity: 50,
-            optTemp: 20,
-            amount: 0
+            plantName: "Agurk",
+            optimalCo2: 400,
+            optimalHumidity: 50,
+            optimalTemp: 20,
+            stock: 0
         },
         {
             id: 4,
-            name: "Gullerod",
-            optCo2: 400,
-            optHumidity: 50,
-            optTemp: 20,
-            amount: 0
+            plantName: "Gullerod",
+            optimalCo2: 400,
+            optimalHumidity: 50,
+            optimalTemp: 20,
+            stock: 0
         }])
 
     /*const response = await fetch(

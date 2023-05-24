@@ -6,10 +6,17 @@
   border: solid black;
   border-radius: 10px;
   overflow: auto;
+  position: fixed;
+  top: 10vh;
+  left: 10vw;
 }
 
 .log-messages {
   overflow: auto;
+}
+
+.message {
+  padding-left: 45%;
 }
 
 #logTextField {
