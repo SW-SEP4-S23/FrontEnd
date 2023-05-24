@@ -12,46 +12,46 @@ import fetchBathes from '../services/fetchBatches';
 //import ServerFail from "../components/ServerFail";
 
 export default function PlantManagement() {
-	const [state, setState] = useState({
-		plantName: '',
-		optimalTemp: '',
-		optimalHumidity: '',
-		optimalCo2: '',
-		stock: '',
-	});
-	const [formToggle, setFormToggle] = useState(false);
+  const [state, setState] = useState({
+    plantName: "",
+    optimalTemp: "",
+    optimalHumidity: "",
+    optimalCo2: "",
+    stock: "",
+  });
+  const [formToggle, setFormToggle] = useState(false);
 
-	const [errors, setErrors] = useState({
-		plantName: '',
-		optimalTemp: '',
-		optimalHumidity: '',
-		optimalCo2: '',
-		stock: '',
-	});
-	const testPlants = [
-		{
-			plantName: 'Tomat',
-			optimalTemp: '20',
-			optimalHumidity: '50',
-			optimalCo2: '1000',
-			stock: '10',
-		},
-		{
-			plantName: 'Agurk',
-			optimalTemp: '23',
-			optimalHumidity: '70',
-			optimalCo2: '573',
-			stock: '12',
-		},
-		{
-			plantName: 'Kartoffel',
-			optimalTemp: '15',
-			optimalHumidity: '40',
-			optimalCo2: '1000',
-			stock: '5',
-		},
-	];
-	const [mode, setMode] = useState(null);
+  const [errors, setErrors] = useState({
+    plantName: "",
+    optimalTemp: "",
+    optimalHumidity: "",
+    optimalCo2: "",
+    stock: "",
+  });
+
+  const testPlants = [
+    {
+      plantName: "Tomat",
+      optimalTemp: "20",
+      optimalHumidity: "50",
+      optimalCo2: "1000",
+      stock: "10",
+    },
+    {
+      plantName: "Agurk",
+      optimalTemp: "23",
+      optimalHumidity: "70",
+      optimalCo2: "573",
+      stock: "12",
+    },
+    {
+      plantName: "Kartoffel",
+      optimalTemp: "15",
+      optimalHumidity: "40",
+      optimalCo2: "1000",
+      stock: "5",
+    },
+  ];
 
 	const [plantOptions, setPlantOptions] = useState([]);
 	const [formTitle, setFormTitle] = useState('');
@@ -59,93 +59,88 @@ export default function PlantManagement() {
 	const [bathes, setBathes] = useState([]);
 	//const [serverFail, setServerFail] = useState([]);
 
-	function onChange(e) {
-		const target = e.target;
-		const value = target.value;
-		const name = target.name;
+  function onChange(e) {
+    const target = e.target;
+    const value = target.value;
+    const name = target.name;
 
-		if (name === 'plantName') {
-			const filteredOptions = plantOptions.filter((plant) =>
-				plant.plantName.toLowerCase().includes(value.toLowerCase())
-			);
+    if (name === "plantName") {
+      const filteredOptions = plantOptions.filter((plant) =>
+        plant.plantName.toLowerCase().includes(value.toLowerCase())
+      );
 
-			if (filteredOptions.length > 0) {
-				const selectedPlant = filteredOptions.find(
-					(plant) =>
-						plant.plantName.toLowerCase() === value.toLowerCase()
-				);
+      if (filteredOptions.length > 0) {
+        const selectedPlant = filteredOptions.find(
+          (plant) => plant.plantName.toLowerCase() === value.toLowerCase()
+        );
 
-				setState((prevState) => ({
-					...prevState,
-					[name]: value,
-					optimalTemp: selectedPlant ? selectedPlant.optimalTemp : '',
-					optimalHumidity: selectedPlant
-						? selectedPlant.optimalHumidity
-						: '',
-					optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : '',
-					stock: selectedPlant ? selectedPlant.stock : '',
-				}));
-			} else {
-				setState((prevState) => ({
-					...prevState,
-					[name]: value,
-					optimalTemp: '',
-					optimalHumidity: '',
-					optimalCo2: '',
-					stock: '',
-				}));
-			}
-		} else {
-			setState((prevState) => ({
-				...prevState,
-				[name]: value,
-			}));
-		}
-	}
+        setState((prevState) => ({
+          ...prevState,
+          [name]: value,
+          optimalTemp: selectedPlant ? selectedPlant.optimalTemp : "",
+          optimalHumidity: selectedPlant ? selectedPlant.optimalHumidity : "",
+          optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : "",
+          stock: selectedPlant ? selectedPlant.stock : "",
+        }));
+      } else {
+        setState((prevState) => ({
+          ...prevState,
+          [name]: value,
+          optimalTemp: "",
+          optimalHumidity: "",
+          optimalCo2: "",
+          stock: "",
+        }));
+      }
+    } else {
+      setState((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  }
 
-	function onSubmit(e) {
-		e.preventDefault();
+  const [mode, setMode] = useState(null);
 
-		const response = plantFormInputValidation(state);
+  function onSubmit(e) {
+    e.preventDefault();
 
-		if (Object.keys(response).length !== 0) {
-			setErrors(response);
-			return;
-		}
+    const response = plantFormInputValidation(state);
 
-		if (mode === 'register') {
-			registerPlant(state);
-		} else if (mode === 'edit') {
-			editPlant(state);
-		}
+    if (Object.keys(response).length !== 0) {
+      setErrors(response);
+      return;
+    }
 
-		setState({
-			plantName: '',
-			optimalTemp: '',
-			optimalHumidity: '',
-			optimalCo2: '',
-			stock: '',
-		});
-	}
+    if (mode === "register") {
+      registerPlant(state);
+    } else if (mode === "edit") {
+      editPlant(state);
+    }
 
-	function openForm(buttonType) {
-		setMode(buttonType);
-		setFormToggle(true);
+    setState({
+      plantName: "",
+      optimalTemp: "",
+      optimalHumidity: "",
+      optimalCo2: "",
+      stock: "",
+    });
+  }
 
-		const formTitle =
-			buttonType === 'register' ? 'Registrer Plante' : 'Rediger Plante';
-		setFormTitle(formTitle);
-	}
+  function openForm(buttonType) {
+    setMode(buttonType);
+    setFormToggle(true);
 
-	function handleButtonClick(buttonType) {
-		openForm(buttonType);
-	}
+    const formTitle =
+      buttonType === "register" ? "Registrer Plante" : "Rediger Plante";
+    setFormTitle(formTitle);
+  }
 
-	function closeForm() {
-		setFormToggle(false);
-	}
+  function closeForm() {
+    setFormToggle(false);
+  }
 
-	/*useEffect(() => {
+  /*useEffect(() => {
 	async function fetchData() {
 	  const options = await fetchPlants();
 	  setPlantOptions(options);
@@ -173,72 +168,47 @@ export default function PlantManagement() {
 	}, []);
 
 
-	function onSearch(value) {
-		const result = data.filter((item) => {
-			return item.name.toLowerCase().includes(value.toLowerCase());
-		});
-		setData(result);
-	}
+  function onSearch(value) {
+    const result = data.filter((item) => {
+      return item.name.toLowerCase().includes(value.toLowerCase());
+    });
+    setData(result);
+  }
+  function onAmountSubmit(id) {
+	const filteredItem = data.filter((item) => item.id === id)[0];
+	postBatch(filteredItem);
+}
 
-	function onAmountSubmit(id) {
-		const filteredItem = data.filter((item) => item.id === id)[0];
-		postBatch(filteredItem);
-	}
+function onAmountChange(id, value) {
+	const newData = data.map((item) => {
+		if (item.id === id) {
+			item.amount = value;
+		}
+		return item;
+	});
+	setData(newData);
+}
 
-	function onAmountChange(id, value) {
-		const newData = data.map((item) => {
-			if (item.id === id) {
-				item.amount = value;
-			}
-			return item;
-		});
-		setData(newData);
-	}
 
-	return (
-		<>
-			<div className='top-container plant-management-container'>
-				<div id='PlantCard'>
-					<div id='PlantHeader'>
-						<h1> Plantebeholdning</h1>
-						<div id='PlantSearch'>
-							<input
-								onChange={(e) => onSearch(e.target.value)}
-								placeholder='Søg efter plante..'></input>
-							<button>Søg</button>
-						</div>
-					</div>
-					<div id='PlantData'>
-						<StockTable
-							data={data}
-							onChange={onAmountChange}
-							onSubmit={onAmountSubmit}
-						/>
-					</div>
-					<div id='PlantFooter'>
-						<button
-							onClick={() => handleButtonClick('register')}
-							id='PlantReg'>
-							REGISTRER PLANTE
-						</button>
-					</div>
-				</div>
+  return (
+    <>
+      <div>
+        <PlantContainer onButtonClick={openForm} onSearch={onSearch} />
+      </div>
 
-				<div>
-					<p>{state.plantName}</p>
-					<PlantRegister
-						mode={mode}
-						formTitle={formTitle}
-						filteredOptions={plantOptions}
-						onChange={onChange}
-						state={state}
-						onSubmit={onSubmit}
-						errors={errors}
-						closeForm={closeForm}
-						toggleForm={formToggle}
-					/>
-				</div>
-			</div>
-		</>
-	);
+      <div>
+        <PlantRegister
+          mode={mode}
+          formTitle={formTitle}
+          filteredOptions={plantOptions}
+          onChange={onChange}
+          state={state}
+          onSubmit={onSubmit}
+          errors={errors}
+          closeForm={closeForm}
+          toggleForm={formToggle}
+        />
+      </div>
+    </>
+  );
 }
