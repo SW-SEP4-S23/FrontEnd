@@ -84,7 +84,7 @@ function PlantRegister({
               />
             </label>
             {errors?.stock !== "" ? <p>{errors?.stock}</p> : null}
-            <input
+            <input className="databutton"
               type="submit"
               value={mode === "register" ? "Tilføj" : "Gem"}
             />
