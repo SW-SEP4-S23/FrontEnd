@@ -8,50 +8,23 @@ import plantFormInputValidation from "../utils/plantFormInputValidation";
 import fetchPlants from "../services/fetchPlants";
 
 export default function PlantManagement() {
-  const [state, setState] = useState({
-    plantName: "",
-    optimalTemp: "",
-    optimalHumidity: "",
-    optimalCo2: "",
-    stock: "",
-  });
-  const [formToggle, setFormToggle] = useState(false);
-
-  const [errors, setErrors] = useState({
-    plantName: "",
-    optimalTemp: "",
-    optimalHumidity: "",
-    optimalCo2: "",
-    stock: "",
-  });
-
   const testPlants = [
-    {
-      plantName: "Tomat",
-      optimalTemp: "20",
-      optimalHumidity: "50",
-      optimalCo2: "1000",
-      stock: "10",
-    },
-    {
-      plantName: "Agurk",
-      optimalTemp: "23",
-      optimalHumidity: "70",
-      optimalCo2: "573",
-      stock: "12",
-    },
-    {
-      plantName: "Kartoffel",
-      optimalTemp: "15",
-      optimalHumidity: "40",
-      optimalCo2: "1000",
-      stock: "5",
-    },
+    { plantName: "Tomat", optimalTemp: "20", optimalHumidity: "50", optimalCo2: "1000", stock: "10", },
+    { plantName: "Agurk", optimalTemp: "23", optimalHumidity: "70", optimalCo2: "573", stock: "12", },
+    { plantName: "Kartoffel", optimalTemp: "15", optimalHumidity: "40", optimalCo2: "1000", stock: "5", },
   ];
-
+  const [state, setState] = useState({ plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "", });
+  const [formToggle, setFormToggle] = useState(false);
+  const [errors, setErrors] = useState({ plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "", });
   const [plantOptions, setPlantOptions] = useState([]);
   const [formTitle, setFormTitle] = useState("");
   const [data, setData] = useState([]);
+  const [mode, setMode] = useState(null);
+
+  useEffect(() => {
+    setPlantOptions(testPlants);
+    fetchPlants(setData);
+  }, []);
 
   function onChange(e) {
     const target = e.target;
@@ -69,32 +42,20 @@ export default function PlantManagement() {
         );
 
         setState((prevState) => ({
-          ...prevState,
-          [name]: value,
-          optimalTemp: selectedPlant ? selectedPlant.optimalTemp : "",
-          optimalHumidity: selectedPlant ? selectedPlant.optimalHumidity : "",
-          optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : "",
-          stock: selectedPlant ? selectedPlant.stock : "",
+          ...prevState, [name]: value, optimalTemp: selectedPlant ? selectedPlant.optimalTemp : "", optimalHumidity: selectedPlant ? selectedPlant.optimalHumidity : "", optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : "", stock: selectedPlant ? selectedPlant.stock : "",
         }));
       } else {
         setState((prevState) => ({
-          ...prevState,
-          [name]: value,
-          optimalTemp: "",
-          optimalHumidity: "",
-          optimalCo2: "",
-          stock: "",
+          ...prevState, [name]: value, optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "",
         }));
       }
     } else {
       setState((prevState) => ({
-        ...prevState,
-        [name]: value,
+        ...prevState, [name]: value,
       }));
     }
   }
 
-  const [mode, setMode] = useState(null);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -113,11 +74,7 @@ export default function PlantManagement() {
     }
 
     setState({
-      plantName: "",
-      optimalTemp: "",
-      optimalHumidity: "",
-      optimalCo2: "",
-      stock: "",
+      plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "",
     });
   }
 
@@ -134,28 +91,20 @@ export default function PlantManagement() {
     setFormToggle(false);
   }
 
-  /*useEffect(() => {
-  async function fetchData() {
-    const options = await fetchPlants();
-    setPlantOptions(options);
-  }
-  fetchData();
-  }, []);*/
-
-  useEffect(() => {
-    setPlantOptions(testPlants);
-  }, []);
-
-  useEffect(() => {
-    fetchPlants(setData);
-  }, []);
-
   function onSearch(value) {
     const result = data.filter((item) => {
       return item.name.toLowerCase().includes(value.toLowerCase());
     });
     setData(result);
   }
+
+  /*useEffect(() => {
+    async function fetchData() {
+      const options = await fetchPlants();
+      setPlantOptions(options);
+    }
+    fetchData();
+    }, []);*/
 
   return (
     <>

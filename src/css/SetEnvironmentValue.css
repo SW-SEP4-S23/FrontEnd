@@ -100,7 +100,7 @@ input:hover{
   cursor: inherit;
 }
 
-input{
+#environment-value-input{
   caret-color: transparent;
 }
 
