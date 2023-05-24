@@ -1,16 +1,19 @@
 {
   "files": {
-    "main.css": "/FrontEnd/static/css/main.30adc8a5.css",
-    "main.js": "/FrontEnd/static/js/main.3712791d.js",
-    "static/media/greenhouse.png": "/FrontEnd/static/media/greenhouse.878d7ac2add2c38f32b1.png",
-    "static/media/greenhouseSmall.jpg": "/FrontEnd/static/media/greenhouseSmall.f6f3a075dedf27434ea1.jpg",
-    "static/media/logo.PNG": "/FrontEnd/static/media/logo.2b6b0cb1361de04f4c9a.PNG",
+    "main.css": "/FrontEnd/static/css/main.0f1b46d5.css",
+    "main.js": "/FrontEnd/static/js/main.00b61bb8.js",
+    "static/media/notification.png": "/FrontEnd/static/media/notification.f2b6b835b98ff0dd2302.png",
+    "static/media/enviromental-values.png": "/FrontEnd/static/media/enviromental-values.cc975a4d449215534740.png",
+    "static/media/inventory.jpg": "/FrontEnd/static/media/inventory.1ec089d9c66a4b70cc46.jpg",
+    "static/media/flowers-background.jpg": "/FrontEnd/static/media/flowers-background.ecebe53709c225e8a6ac.jpg",
+    "static/media/logo.PNG": "/FrontEnd/static/media/logo.0ae1cf3d8c4a72ad78a5.PNG",
+    "static/media/dropdown-logo.png": "/FrontEnd/static/media/dropdown-logo.4947d0b0b2ed97d0de8a.png",
     "index.html": "/FrontEnd/index.html",
-    "main.30adc8a5.css.map": "/FrontEnd/static/css/main.30adc8a5.css.map",
-    "main.3712791d.js.map": "/FrontEnd/static/js/main.3712791d.js.map"
+    "main.0f1b46d5.css.map": "/FrontEnd/static/css/main.0f1b46d5.css.map",
+    "main.00b61bb8.js.map": "/FrontEnd/static/js/main.00b61bb8.js.map"
   },
   "entrypoints": [
-    "static/css/main.30adc8a5.css",
-    "static/js/main.3712791d.js"
+    "static/css/main.0f1b46d5.css",
+    "static/js/main.00b61bb8.js"
   ]
 }
