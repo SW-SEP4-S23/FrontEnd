@@ -141,11 +141,11 @@ export default function PlantManagement() {
 	}
 
 	/*useEffect(() => {
-    async function fetchData() {
-      const options = await fetchPlants();
-      setPlantOptions(options);
-    }
-    fetchData();
+	async function fetchData() {
+	  const options = await fetchPlants();
+	  setPlantOptions(options);
+	}
+	fetchData();
   }, []);*/
 
 	useEffect(() => {
@@ -164,7 +164,7 @@ export default function PlantManagement() {
 	}
 
 	return (
-		<>
+		<><div className='top-container plant-management-container'>
 			<div id='PlantCard'>
 				<div id='PlantHeader'>
 					<h1> Plantebeholdning</h1>
@@ -188,7 +188,6 @@ export default function PlantManagement() {
 			</div>
 
 			<div>
-				<p>{mode === 'register' ? 'Register' : 'Edit'}</p>
 				<p>{state.plantName}</p>
 				<PlantRegister
 					mode={mode}
@@ -202,6 +201,7 @@ export default function PlantManagement() {
 					toggleForm={formToggle}
 				/>
 			</div>
+		</div>
 		</>
 	);
 }

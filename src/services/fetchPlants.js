@@ -9,7 +9,7 @@ async function fetchPlants(setPlants)
         setPlants(data)
     }
     else {
-        alert("Server fejl, prøv igen senere.")
+        console.log("Server fejl, prøv igen senere.")
       }
 
 } export default fetchPlants
