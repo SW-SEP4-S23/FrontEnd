@@ -7,7 +7,8 @@ import editPlant from '../services/editPlant';
 import plantFormInputValidation from '../utils/plantFormInputValidation';
 import StockTable from '../components/StockTable';
 import fetchPlants from '../services/fetchPlants';
-import postBatch from "../services/postBatch";
+import postBatch from '../services/postBatch';
+import fetchBathes from '../services/fetchBatches';
 //import ServerFail from "../components/ServerFail";
 
 export default function PlantManagement() {
@@ -55,7 +56,8 @@ export default function PlantManagement() {
 	const [plantOptions, setPlantOptions] = useState([]);
 	const [formTitle, setFormTitle] = useState('');
 	const [data, setData] = useState([]);
-  //const [serverFail, setServerFail] = useState([]);
+	const [bathes, setBathes] = useState([]);
+	//const [serverFail, setServerFail] = useState([]);
 
 	function onChange(e) {
 		const target = e.target;
@@ -151,6 +153,14 @@ export default function PlantManagement() {
 	fetchData();
   }, []);*/
 
+  	useEffect(() => {
+		data.forEach(plant => {
+			const speciesBathes = bathes.filter((batch) => batch.speciesId === plant.id);
+			const plantAmount = speciesBathes.reduce((acc, batch) => acc + batch.amount, 0);
+			plant.amount = plantAmount;
+		});
+	}, [data, bathes]);
+
 	useEffect(() => {
 		setPlantOptions(testPlants);
 	}, []);
@@ -158,6 +168,10 @@ export default function PlantManagement() {
 	useEffect(() => {
 		fetchPlants(setData);
 	}, []);
+	useEffect(() => {
+		fetchBathes(setBathes);
+	}, []);
+
 
 	function onSearch(value) {
 		const result = data.filter((item) => {
@@ -166,63 +180,65 @@ export default function PlantManagement() {
 		setData(result);
 	}
 
-	function onSubmit(id){
+	function onAmountSubmit(id) {
 		const filteredItem = data.filter((item) => item.id === id)[0];
-		postBatch(filteredItem)
-		
-	  }
-	
-	  function onChange(id, value){
+		postBatch(filteredItem);
+	}
+
+	function onAmountChange(id, value) {
 		const newData = data.map((item) => {
-		  if(item.id === id){
-			item.amount = value
-		  }
-		  return item
-		})
-		setData(newData)
-	  }
+			if (item.id === id) {
+				item.amount = value;
+			}
+			return item;
+		});
+		setData(newData);
+	}
 
 	return (
-		<><div className='top-container plant-management-container'>
-			<div id='PlantCard'>
-				<div id='PlantHeader'>
-					<h1> Plantebeholdning</h1>
-					<div id='PlantSearch'>
-						<input
-							onChange={(e) => onSearch(e.target.value)}
-							placeholder='Søg efter plante..'></input>
-						<button>Søg</button>
+		<>
+			<div className='top-container plant-management-container'>
+				<div id='PlantCard'>
+					<div id='PlantHeader'>
+						<h1> Plantebeholdning</h1>
+						<div id='PlantSearch'>
+							<input
+								onChange={(e) => onSearch(e.target.value)}
+								placeholder='Søg efter plante..'></input>
+							<button>Søg</button>
+						</div>
+					</div>
+					<div id='PlantData'>
+						<StockTable
+							data={data}
+							onChange={onAmountChange}
+							onSubmit={onAmountSubmit}
+						/>
+					</div>
+					<div id='PlantFooter'>
+						<button
+							onClick={() => handleButtonClick('register')}
+							id='PlantReg'>
+							REGISTRER PLANTE
+						</button>
 					</div>
 				</div>
-				<div id='PlantData'>
-					<StockTable data={data} onChange={onChange}
-onSubmit={onSubmit}
-/>
-				</div>
-				<div id='PlantFooter'>
-					<button
-						onClick={() => handleButtonClick('register')}
-						id='PlantReg'>
-						REGISTRER PLANTE
-					</button>
-				</div>
-			</div>
 
-			<div>
-				<p>{state.plantName}</p>
-				<PlantRegister
-					mode={mode}
-					formTitle={formTitle}
-					filteredOptions={plantOptions}
-					onChange={onChange}
-					state={state}
-					onSubmit={onSubmit}
-					errors={errors}
-					closeForm={closeForm}
-					toggleForm={formToggle}
-				/>
+				<div>
+					<p>{state.plantName}</p>
+					<PlantRegister
+						mode={mode}
+						formTitle={formTitle}
+						filteredOptions={plantOptions}
+						onChange={onChange}
+						state={state}
+						onSubmit={onSubmit}
+						errors={errors}
+						closeForm={closeForm}
+						toggleForm={formToggle}
+					/>
+				</div>
 			</div>
-		</div>
 		</>
 	);
 }

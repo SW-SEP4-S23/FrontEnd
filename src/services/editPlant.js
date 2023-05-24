@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 export default async function editPlant(state) {
+    alert("edited plant")
+/*    
 // TODO: Implement function to contact API and register plant
 alert(state.plantName)
 
@@ -11,5 +13,5 @@ axios.patch('https://testapi.jasonwatmore.com/invalid-url', state)
 .catch(error => {         
     element.parentElement.innerHTML = `Error: ${error.message}`;         
     console.error('There was an error!', error);
- });
+ });*/
 }

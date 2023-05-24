@@ -1,5 +1,7 @@
 export default async function postBatch(setData) {
-    const response = await fetch(
+    alert("posted to server")
+
+    /*const response = await fetch(
         `https://cloud-app-byi2ujnffa-ez.a.run.app/stock/batch`
     );
     
@@ -9,5 +11,5 @@ export default async function postBatch(setData) {
       }
       else {
         alert("Server fejl, prøv igen senere.")
-      }
+      }*/
     }  

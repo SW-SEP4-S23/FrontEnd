@@ -3,7 +3,7 @@ import "../css/styles.css"
 import "../utils/dataNameToLabel.js"
 import Amount from "../components/Amount"
 
-export default function StockTable({data, onChange, onSubmit}) {
+export default function StockTable({data, onChange, onSubmit, handleButtonClick}) {
 
      if (data === undefined || data === null || data.length === 0)
     data = [
@@ -33,6 +33,7 @@ export default function StockTable({data, onChange, onSubmit}) {
         }        
     ]  
 
+    console.log(data)
     return (
         <>
             <table>
@@ -44,16 +45,18 @@ export default function StockTable({data, onChange, onSubmit}) {
                     <th>Optimal CO2</th>
                     <th>Se logbog</th>
                     <th>Antal</th>
+                    <th>Rediger</th>
                     </tr>
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
                             <tr key={index}>
                                 <td>{item.name} /</td>
-                                <td>{item.optCo2}</td>
                                 <td>{item.optTemp}</td>
-                                <td>{item.optHum}</td>
+                                <td>{item.optHumidity}</td>
+                                <td>{item.optCo2}</td>
                                 <td><button>Se logbog</button></td>
                                 <td><Amount amount={item.amount} id={item.id} onChange={onChange} onSubmit={onSubmit}/></td>
+                                <td><button onClick={()=> handleButtonClick("edit")}>Rediger</button></td>
                             </tr>
                         )
                     })) : <tr><td colSpan={6}> Ingen data at vise.</td></tr>}                
