@@ -2,13 +2,32 @@ import "../css/PlantManagement.css"
 import fetchPlants from "../services/fetchPlants";
 import React, { useState, useEffect } from "react";
 import StockTable from "../components/StockTable";
+import postBatch from "../services/postBatch";
+//import ServerFail from "../components/ServerFail";
 
 export default function PlantManagement(){
   const [data, setData] = useState([]);
+  //const [serverFail, setServerFail] = useState([]);
 
   useEffect(() => {
     fetchPlants(setData)
   },[]);
+
+  function onSubmit(id){
+    const filteredItem = data.filter((item) => item.id === id)[0];
+    postBatch(filteredItem)
+    
+  }
+
+  function onChange(id, value){
+    const newData = data.map((item) => {
+      if(item.id === id){
+        item.amount = value
+      }
+      return item
+    })
+    setData(newData)
+  }
   
 
     return (
@@ -23,6 +42,8 @@ export default function PlantManagement(){
 <div id = "PlantData" >
 <StockTable 
 data = {data}
+onChange={onChange}
+onSubmit={onSubmit}
 />
 </div>
 <div id = "PlantFooter">

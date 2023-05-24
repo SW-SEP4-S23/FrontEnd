@@ -1,13 +1,15 @@
 import "../css/Data.css"
 import "../css/styles.css"
 import "../utils/dataNameToLabel.js"
+import Amount from "../components/Amount"
 
-export default function StockTable({data}) {
+export default function StockTable({data, onChange, onSubmit}) {
 
-   /*  if (data === undefined || data === null || data.length === 0)
+     if (data === undefined || data === null || data.length === 0)
     data = [
         {
             "name": "Basilikum",
+            "id": 123,
             "optCo2": 400,
             "optTemp": 20,
             "optHum": 50,
@@ -15,6 +17,7 @@ export default function StockTable({data}) {
         },
         {
             "name": "Persille",
+            "id" : 234,
             "optCo2": 400,
             "optTemp": 21,
             "optHum": 51,
@@ -22,12 +25,13 @@ export default function StockTable({data}) {
         },
         {
             "name": "Koriander",
+            "id" : 345,
             "optCo2": 400,
             "optTemp": 22,
             "optHum": 52,
             "amount": 12
         }        
-    ]  */
+    ]  
 
     return (
         <>
@@ -41,21 +45,21 @@ export default function StockTable({data}) {
                     <th>Se logbog</th>
                     <th>Antal</th>
                     </tr>
-
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.name}</td>
+                                <td>{item.name} /</td>
                                 <td>{item.optCo2}</td>
                                 <td>{item.optTemp}</td>
                                 <td>{item.optHum}</td>
-                                <td>{}</td>
-                                <td>{item.amount}</td>
+                                <td><button>Se logbog</button></td>
+                                <td><Amount amount={item.amount} id={item.id} onChange={onChange} onSubmit={onSubmit}/></td>
                             </tr>
                         )
                     })) : <tr><td colSpan={6}> Ingen data at vise.</td></tr>}                
                 </tbody>
             </table>
+            
         </>
     )
 }
