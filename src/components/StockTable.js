@@ -3,7 +3,7 @@ import "../css/styles.css"
 import "../utils/dataNameToLabel.js"
 import Amount from "../components/Amount"
 
-export default function StockTable({data, onChange, onSubmit, handleButtonClick}) {
+export default function StockTable({data, onChange, handleButtonClick}) {
 
      if (data === undefined || data === null || data.length === 0)
     data = [
@@ -50,12 +50,12 @@ export default function StockTable({data, onChange, onSubmit, handleButtonClick}
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
                             <tr key={index}>
-                                <td>{item.name} /</td>
+                                <td>{item.name}</td>
                                 <td>{item.optTemp}</td>
                                 <td>{item.optHumidity}</td>
                                 <td>{item.optCo2}</td>
                                 <td><button>Se logbog</button></td>
-                                <td><Amount amount={item.amount} id={item.id} onChange={onChange} onSubmit={onSubmit}/></td>
+                                <td><input type={"number"} value={item.amount} onChange={(e)=> onChange(e.target.value, item.id)}/></td>
                                 <td><button onClick={()=> handleButtonClick("edit")}>Rediger</button></td>
                             </tr>
                         )

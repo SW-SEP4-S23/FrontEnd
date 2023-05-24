@@ -56,7 +56,8 @@ export default function PlantManagement() {
 	const [plantOptions, setPlantOptions] = useState([]);
 	const [formTitle, setFormTitle] = useState('');
 	const [data, setData] = useState([]);
-	const [bathes, setBathes] = useState([]);
+	const [batches, setBatches] = useState([]);
+	const [filteredData, setFilteredData] = useState([]);
 	//const [serverFail, setServerFail] = useState([]);
 
   function onChange(e) {
@@ -148,23 +149,33 @@ export default function PlantManagement() {
 	fetchData();
   }, []);*/
 
-  	useEffect(() => {
-		data.forEach(plant => {
-			const speciesBathes = bathes.filter((batch) => batch.speciesId === plant.id);
-			const plantAmount = speciesBathes.reduce((acc, batch) => acc + batch.amount, 0);
-			plant.amount = plantAmount;
-		});
-	}, [data, bathes]);
 
 	useEffect(() => {
 		setPlantOptions(testPlants);
 	}, []);
 
 	useEffect(() => {
-		fetchPlants(setData);
-	}, []);
+
+		function handleData(data)
+		{
+			console.log(data)
+
+			data.forEach(plant => {
+				const speciesBatches = batches.filter((batch) => batch.speciesId === plant.id);
+				const plantAmount = speciesBatches.reduce((acc, batch) => acc + batch.amount, 0);
+				plant.amount = plantAmount;
+			});
+			console.log(data)
+			setData(data)
+			setFilteredData(data)
+		}
+
+		fetchPlants(handleData);
+
+	}, [batches]);
+
 	useEffect(() => {
-		fetchBathes(setBathes);
+		fetchBathes(setBatches);
 	}, []);
 
 
@@ -172,14 +183,10 @@ export default function PlantManagement() {
     const result = data.filter((item) => {
       return item.name.toLowerCase().includes(value.toLowerCase());
     });
-    setData(result);
+    setFilteredData(result);
   }
-  function onAmountSubmit(id) {
-	const filteredItem = data.filter((item) => item.id === id)[0];
-	postBatch(filteredItem);
-}
 
-function onAmountChange(id, value) {
+function onAmountChange(value, id) {
 	const newData = data.map((item) => {
 		if (item.id === id) {
 			item.amount = value;
@@ -193,7 +200,7 @@ function onAmountChange(id, value) {
   return (
     <>
       <div>
-        <PlantContainer onButtonClick={openForm} onSearch={onSearch} />
+        <PlantContainer data={filteredData} onButtonClick={openForm} onSearch={onSearch} onAmountChange={onAmountChange}/>
       </div>
 
       <div>
