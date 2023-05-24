@@ -167,9 +167,6 @@ function onAmountChange(value, id) {
       <div className="plant-management-container top-container">
         <PlantContainer data={filteredData} onButtonClick={openForm} onSearch={onSearch} onAmountChange={onAmountChange}/>
       </div>
-      <div className="plant-management-container top-container">
-
-
         <div>
           <PlantRegister
             mode={mode}
@@ -183,7 +180,6 @@ function onAmountChange(value, id) {
             toggleForm={formToggle}
           />
         </div>
-      </div>
     </>
   );
 }
