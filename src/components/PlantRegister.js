@@ -13,13 +13,14 @@ function PlantRegister({
   closeForm,
   mode,
 }) {
-
-
+  
   return (
     <>
       {toggleForm && (
         <div id="Plantform">
-          <CloseButton onClick={() => closeForm()}><GrFormClose/></CloseButton>
+          <CloseButton onClick={() => closeForm()}>
+            <GrFormClose />
+          </CloseButton>
           <form onSubmit={(e) => onSubmit(e)}>
             <h3>{formTitle}</h3>
             <label>
@@ -83,7 +84,10 @@ function PlantRegister({
               />
             </label>
             {errors?.stock !== "" ? <p>{errors?.stock}</p> : null}
-            <input type="submit" value={mode === 'register' ? 'Tilføj' : 'Gem'} />
+            <input
+              type="submit"
+              value={mode === "register" ? "Tilføj" : "Gem"}
+            />
             {errors?.submit !== "" ? <p>{errors?.submit}</p> : null}
           </form>
         </div>
