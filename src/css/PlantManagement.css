@@ -21,12 +21,10 @@
 #PlantHeader {
     display: block;
     width: 100%;
-    height: 80px;
     border: 1px solid black;
     text-align: center;
-    overflow: hidden;
-
-
+    display: flex;
+    align-items: center;
 }
 
 #PlantSearch {
@@ -68,8 +66,6 @@ form {
     flex-direction: column;
     margin: auto;
     color: #2f234f;
-    background-color: #fef7e5;
-    border: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,3 +77,31 @@ form {
 input {
     margin-left: 20px;
 }
+
+#Plantform {
+    width: 50vw;
+    height: 30vw;
+    margin: auto;
+    padding: 10px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: 1px solid black;
+    background-color: #fef7e5;
+}
+
+
+.plant-management-container.top-container::before {
+    background-image: url("../images/flowers-background.jpg");
+    height: 100vh;
+    position: fixed;
+  }
+
+@media screen and (max-width: 600px) {
+    #Plantform {
+        width: 90vw;
+    }
+}
+    

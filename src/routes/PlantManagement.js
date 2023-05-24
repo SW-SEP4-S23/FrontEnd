@@ -1,83 +1,228 @@
-import "../css/PlantManagement.css"
-import fetchPlants from "../services/fetchPlants";
-import React, { useState, useEffect } from "react";
-import StockTable from "../components/StockTable";
+import '../css/PlantManagement.css';
+import PlantContainer from '../components/PlantContainer';
+import PlantRegister from '../components/PlantRegister';
+import React, { useState, useEffect } from 'react';
+import registerPlant from '../services/registerPlant';
+import editPlant from '../services/editPlant';
+import plantFormInputValidation from '../utils/plantFormInputValidation';
+import StockTable from '../components/StockTable';
+import fetchPlants from '../services/fetchPlants';
 import postBatch from "../services/postBatch";
 //import ServerFail from "../components/ServerFail";
 
-export default function PlantManagement(){
-  const [data, setData] = useState([]);
+export default function PlantManagement() {
+	const [state, setState] = useState({
+		plantName: '',
+		optimalTemp: '',
+		optimalHumidity: '',
+		optimalCo2: '',
+		stock: '',
+	});
+	const [formToggle, setFormToggle] = useState(false);
+
+	const [errors, setErrors] = useState({
+		plantName: '',
+		optimalTemp: '',
+		optimalHumidity: '',
+		optimalCo2: '',
+		stock: '',
+	});
+	const testPlants = [
+		{
+			plantName: 'Tomat',
+			optimalTemp: '20',
+			optimalHumidity: '50',
+			optimalCo2: '1000',
+			stock: '10',
+		},
+		{
+			plantName: 'Agurk',
+			optimalTemp: '23',
+			optimalHumidity: '70',
+			optimalCo2: '573',
+			stock: '12',
+		},
+		{
+			plantName: 'Kartoffel',
+			optimalTemp: '15',
+			optimalHumidity: '40',
+			optimalCo2: '1000',
+			stock: '5',
+		},
+	];
+	const [mode, setMode] = useState(null);
+
+	const [plantOptions, setPlantOptions] = useState([]);
+	const [formTitle, setFormTitle] = useState('');
+	const [data, setData] = useState([]);
   //const [serverFail, setServerFail] = useState([]);
 
-  useEffect(() => {
-    fetchPlants(setData)
-  },[]);
+	function onChange(e) {
+		const target = e.target;
+		const value = target.value;
+		const name = target.name;
 
-  function onSubmit(id){
-    const filteredItem = data.filter((item) => item.id === id)[0];
-    postBatch(filteredItem)
-    
-  }
+		if (name === 'plantName') {
+			const filteredOptions = plantOptions.filter((plant) =>
+				plant.plantName.toLowerCase().includes(value.toLowerCase())
+			);
 
-  function onChange(id, value){
-    const newData = data.map((item) => {
-      if(item.id === id){
-        item.amount = value
-      }
-      return item
-    })
-    setData(newData)
-  }
-  
+			if (filteredOptions.length > 0) {
+				const selectedPlant = filteredOptions.find(
+					(plant) =>
+						plant.plantName.toLowerCase() === value.toLowerCase()
+				);
 
-    return (
-        <>
-<div id = "PlantCard">
-<div id = "PlantHeader">
-    <h1> Plantebeholdning</h1>
-    <div  id = "PlantSearch"><textarea placeholder="Søg efter plante.."></textarea> 
-    <button>Søg</button></div>
+				setState((prevState) => ({
+					...prevState,
+					[name]: value,
+					optimalTemp: selectedPlant ? selectedPlant.optimalTemp : '',
+					optimalHumidity: selectedPlant
+						? selectedPlant.optimalHumidity
+						: '',
+					optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : '',
+					stock: selectedPlant ? selectedPlant.stock : '',
+				}));
+			} else {
+				setState((prevState) => ({
+					...prevState,
+					[name]: value,
+					optimalTemp: '',
+					optimalHumidity: '',
+					optimalCo2: '',
+					stock: '',
+				}));
+			}
+		} else {
+			setState((prevState) => ({
+				...prevState,
+				[name]: value,
+			}));
+		}
+	}
 
-</div>
-<div id = "PlantData" >
-<StockTable 
-data = {data}
-onChange={onChange}
+	function onSubmit(e) {
+		e.preventDefault();
+
+		const response = plantFormInputValidation(state);
+
+		if (Object.keys(response).length !== 0) {
+			setErrors(response);
+			return;
+		}
+
+		if (mode === 'register') {
+			registerPlant(state);
+		} else if (mode === 'edit') {
+			editPlant(state);
+		}
+
+		setState({
+			plantName: '',
+			optimalTemp: '',
+			optimalHumidity: '',
+			optimalCo2: '',
+			stock: '',
+		});
+	}
+
+	function openForm(buttonType) {
+		setMode(buttonType);
+		setFormToggle(true);
+
+		const formTitle =
+			buttonType === 'register' ? 'Registrer Plante' : 'Rediger Plante';
+		setFormTitle(formTitle);
+	}
+
+	function handleButtonClick(buttonType) {
+		openForm(buttonType);
+	}
+
+	function closeForm() {
+		setFormToggle(false);
+	}
+
+	/*useEffect(() => {
+	async function fetchData() {
+	  const options = await fetchPlants();
+	  setPlantOptions(options);
+	}
+	fetchData();
+  }, []);*/
+
+	useEffect(() => {
+		setPlantOptions(testPlants);
+	}, []);
+
+	useEffect(() => {
+		fetchPlants(setData);
+	}, []);
+
+	function onSearch(value) {
+		const result = data.filter((item) => {
+			return item.name.toLowerCase().includes(value.toLowerCase());
+		});
+		setData(result);
+	}
+
+	function onSubmit(id){
+		const filteredItem = data.filter((item) => item.id === id)[0];
+		postBatch(filteredItem)
+		
+	  }
+	
+	  function onChange(id, value){
+		const newData = data.map((item) => {
+		  if(item.id === id){
+			item.amount = value
+		  }
+		  return item
+		})
+		setData(newData)
+	  }
+
+	return (
+		<><div className='top-container plant-management-container'>
+			<div id='PlantCard'>
+				<div id='PlantHeader'>
+					<h1> Plantebeholdning</h1>
+					<div id='PlantSearch'>
+						<input
+							onChange={(e) => onSearch(e.target.value)}
+							placeholder='Søg efter plante..'></input>
+						<button>Søg</button>
+					</div>
+				</div>
+				<div id='PlantData'>
+					<StockTable data={data} onChange={onChange}
 onSubmit={onSubmit}
 />
-</div>
-<div id = "PlantFooter">
-<button id = "PlantReg">REGISTRER PLANTE</button>
-</div>
-</div>
+				</div>
+				<div id='PlantFooter'>
+					<button
+						onClick={() => handleButtonClick('register')}
+						id='PlantReg'>
+						REGISTRER PLANTE
+					</button>
+				</div>
+			</div>
 
-<div id = "Planteformel">
-    
-<form>
-<h3>Registrer Plante</h3>
-      <label>Plantenavn
-        <input type="text" />
-      </label>
-      <label>Optimal temperatur
-        <input type="number" />
-      </label>
-      <label>Optimal luftfugtighed
-        <input type="number" />
-      </label>
-      <label>Optimal CO2
-        <input type="number" />
-      </label>
-      <label>Lagerbeholdning
-        <input type="number" />
-      </label>
-      <input type="submit" value = "Tilføj"/>
-
-    </form>
-
-</div>
-</>
-    )
-
-
-    
+			<div>
+				<p>{state.plantName}</p>
+				<PlantRegister
+					mode={mode}
+					formTitle={formTitle}
+					filteredOptions={plantOptions}
+					onChange={onChange}
+					state={state}
+					onSubmit={onSubmit}
+					errors={errors}
+					closeForm={closeForm}
+					toggleForm={formToggle}
+				/>
+			</div>
+		</div>
+		</>
+	);
 }
