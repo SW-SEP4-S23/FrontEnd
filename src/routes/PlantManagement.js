@@ -135,11 +135,11 @@ export default function PlantManagement() {
   }
 
   /*useEffect(() => {
-	async function fetchData() {
-	  const options = await fetchPlants();
-	  setPlantOptions(options);
-	}
-	fetchData();
+  async function fetchData() {
+    const options = await fetchPlants();
+    setPlantOptions(options);
+  }
+  fetchData();
   }, []);*/
 
   useEffect(() => {
@@ -159,22 +159,24 @@ export default function PlantManagement() {
 
   return (
     <>
-      <div>
-        <PlantContainer onButtonClick={openForm} onSearch={onSearch} />
-      </div>
+      <div className="plant-management-container top-container">
+        <div>
+          <PlantContainer onButtonClick={openForm} onSearch={onSearch} />
+        </div>
 
-      <div>
-        <PlantRegister
-          mode={mode}
-          formTitle={formTitle}
-          filteredOptions={plantOptions}
-          onChange={onChange}
-          state={state}
-          onSubmit={onSubmit}
-          errors={errors}
-          closeForm={closeForm}
-          toggleForm={formToggle}
-        />
+        <div>
+          <PlantRegister
+            mode={mode}
+            formTitle={formTitle}
+            filteredOptions={plantOptions}
+            onChange={onChange}
+            state={state}
+            onSubmit={onSubmit}
+            errors={errors}
+            closeForm={closeForm}
+            toggleForm={formToggle}
+          />
+        </div>
       </div>
     </>
   );

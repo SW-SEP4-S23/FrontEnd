@@ -32,7 +32,7 @@ export default function StockTable({data}) {
     return (
         <>
             <table>
-                <tbody>
+                <tbody className="green-table">
                     <tr>
                     <th>Plantenavn</th>
                     <th>Optimal temperatur</th>
