@@ -12,50 +12,23 @@ import fetchBathes from '../services/fetchBatches';
 //import ServerFail from "../components/ServerFail";
 
 export default function PlantManagement() {
-  const [state, setState] = useState({
-    plantName: "",
-    optimalTemp: "",
-    optimalHumidity: "",
-    optimalCo2: "",
-    stock: "",
-  });
-  const [formToggle, setFormToggle] = useState(false);
-
-  const [errors, setErrors] = useState({
-    plantName: "",
-    optimalTemp: "",
-    optimalHumidity: "",
-    optimalCo2: "",
-    stock: "",
-  });
-
   const testPlants = [
-    {
-      plantName: "Tomat",
-      optimalTemp: "20",
-      optimalHumidity: "50",
-      optimalCo2: "1000",
-      stock: "10",
-    },
-    {
-      plantName: "Agurk",
-      optimalTemp: "23",
-      optimalHumidity: "70",
-      optimalCo2: "573",
-      stock: "12",
-    },
-    {
-      plantName: "Kartoffel",
-      optimalTemp: "15",
-      optimalHumidity: "40",
-      optimalCo2: "1000",
-      stock: "5",
-    },
+    { plantName: "Tomat", optimalTemp: "20", optimalHumidity: "50", optimalCo2: "1000", stock: "10", },
+    { plantName: "Agurk", optimalTemp: "23", optimalHumidity: "70", optimalCo2: "573", stock: "12", },
+    { plantName: "Kartoffel", optimalTemp: "15", optimalHumidity: "40", optimalCo2: "1000", stock: "5", },
   ];
-
+  const [state, setState] = useState({ plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "", });
+  const [formToggle, setFormToggle] = useState(false);
+  const [errors, setErrors] = useState({ plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "", });
 	const [plantOptions, setPlantOptions] = useState([]);
 	const [formTitle, setFormTitle] = useState('');
 	const [data, setData] = useState([]);
+  const [mode, setMode] = useState(null);
+
+  useEffect(() => {
+    setPlantOptions(testPlants);
+    fetchPlants(setData);
+  }, []);
 	const [batches, setBatches] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
 	//const [serverFail, setServerFail] = useState([]);
@@ -76,32 +49,20 @@ export default function PlantManagement() {
         );
 
         setState((prevState) => ({
-          ...prevState,
-          [name]: value,
-          optimalTemp: selectedPlant ? selectedPlant.optimalTemp : "",
-          optimalHumidity: selectedPlant ? selectedPlant.optimalHumidity : "",
-          optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : "",
-          stock: selectedPlant ? selectedPlant.stock : "",
+          ...prevState, [name]: value, optimalTemp: selectedPlant ? selectedPlant.optimalTemp : "", optimalHumidity: selectedPlant ? selectedPlant.optimalHumidity : "", optimalCo2: selectedPlant ? selectedPlant.optimalCo2 : "", stock: selectedPlant ? selectedPlant.stock : "",
         }));
       } else {
         setState((prevState) => ({
-          ...prevState,
-          [name]: value,
-          optimalTemp: "",
-          optimalHumidity: "",
-          optimalCo2: "",
-          stock: "",
+          ...prevState, [name]: value, optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "",
         }));
       }
     } else {
       setState((prevState) => ({
-        ...prevState,
-        [name]: value,
+        ...prevState, [name]: value,
       }));
     }
   }
 
-  const [mode, setMode] = useState(null);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -120,11 +81,7 @@ export default function PlantManagement() {
     }
 
     setState({
-      plantName: "",
-      optimalTemp: "",
-      optimalHumidity: "",
-      optimalCo2: "",
-      stock: "",
+      plantName: "", optimalTemp: "", optimalHumidity: "", optimalCo2: "", stock: "",
     });
   }
 
@@ -197,24 +154,35 @@ function onAmountChange(value, id) {
 }
 
 
+  /*useEffect(() => {
+    async function fetchData() {
+      const options = await fetchPlants();
+      setPlantOptions(options);
+    }
+    fetchData();
+    }, []);*/
+
   return (
     <>
-      <div>
+      <div className="plant-management-container top-container">
         <PlantContainer data={filteredData} onButtonClick={openForm} onSearch={onSearch} onAmountChange={onAmountChange}/>
       </div>
+      <div className="plant-management-container top-container">
 
-      <div>
-        <PlantRegister
-          mode={mode}
-          formTitle={formTitle}
-          filteredOptions={plantOptions}
-          onChange={onChange}
-          state={state}
-          onSubmit={onSubmit}
-          errors={errors}
-          closeForm={closeForm}
-          toggleForm={formToggle}
-        />
+
+        <div>
+          <PlantRegister
+            mode={mode}
+            formTitle={formTitle}
+            filteredOptions={plantOptions}
+            onChange={onChange}
+            state={state}
+            onSubmit={onSubmit}
+            errors={errors}
+            closeForm={closeForm}
+            toggleForm={formToggle}
+          />
+        </div>
       </div>
     </>
   );

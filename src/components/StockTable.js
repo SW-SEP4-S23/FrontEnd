@@ -1,5 +1,7 @@
 import "../css/Data.css"
 import "../css/styles.css"
+import "../css/PlantManagement.css"
+import "../css/StockTable.css"
 import "../utils/dataNameToLabel.js"
 import Amount from "../components/Amount"
 
@@ -36,8 +38,8 @@ export default function StockTable({data, onChange, handleButtonClick}) {
     console.log(data)
     return (
         <>
-            <table>
-                <tbody>
+            <table id="stock-table">
+                <tbody className="green-table">
                     <tr>
                     <th>Plantenavn</th>
                     <th>Optimal temperatur</th>

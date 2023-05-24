@@ -1,0 +1,62 @@
+#PlantCard {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    color: #2f234f;
+    background-color:  rgb(255, 255, 255, 0.8);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70vw;
+    padding: 5%;
+    margin-top: 30vh;
+}
+
+#PlantData{
+    overflow:auto; 
+    height:400px;
+}
+
+#PlantHeader {
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#plant-container-header{
+    margin: 2vw;
+    color: black;
+    font-size: 3vw;
+}
+
+#PlantSearch {
+    display: flex;
+    float: right;
+    width: auto;
+    height: auto;
+    margin-right: 10%;
+}
+
+#PlantData {
+    width: 100%;
+    border: 1px solid black;
+    height: 300px;
+}
+
+#PlantFooter {
+    width: 100%;
+    border: 1px solid black;
+    height: 80px;
+}
+
+#PlantReg {
+    width: auto;
+    display: flex;
+    float: right;
+    margin-right: 5%;
+}

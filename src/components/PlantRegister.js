@@ -1,5 +1,6 @@
 import CloseButton from "react-bootstrap/CloseButton";
 import "../css/PlantManagement.css";
+import "../css/PlantRegister.css";
 import { GrFormClose } from "react-icons/gr";
 
 function PlantRegister({
@@ -21,7 +22,7 @@ function PlantRegister({
           <CloseButton onClick={() => closeForm()}>
             <GrFormClose />
           </CloseButton>
-          <form onSubmit={(e) => onSubmit(e)}>
+          <form id="form-content" onSubmit={(e) => onSubmit(e)}>
             <h3>{formTitle}</h3>
             <label>
               Plantenavn
@@ -84,7 +85,7 @@ function PlantRegister({
               />
             </label>
             {errors?.stock !== "" ? <p>{errors?.stock}</p> : null}
-            <input
+            <input className="databutton"
               type="submit"
               value={mode === "register" ? "Tilføj" : "Gem"}
             />

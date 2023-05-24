@@ -30,7 +30,7 @@ function SetEnvironmentValue({newThresholds, onChange, onSubmit, currentValues }
                             <p className="currentValue">{dataNameToLabel(dataName)}: </p><p id="data-name">{value}</p>
                             <p>Vælg nye værdier:</p>
                                 <div className="thresholdsinput">
-                                    <label>min:<input
+                                    <label>min:<input id="environment-value-input"
                                         name="min"
                                         type="number"
                                         min= {maxAndMinValues[dataName][0]}
