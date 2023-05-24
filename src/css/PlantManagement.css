@@ -13,6 +13,11 @@
     margin-top: 5%;
 }
 
+#PlantData{
+    overflow:scroll; 
+    height:400px;
+}
+
 #PlantHeader {
     display: block;
     width: 100%;

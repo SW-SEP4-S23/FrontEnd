@@ -1,15 +1,15 @@
-async function fetchPlants(setData) {
-
+async function fetchPlants(setPlants)
+{
     const response = await fetch(
-      `https://cloud-app-byi2ujnffa-ez.a.run.app/$plants/`
+        'https://cloud-app-byi2ujnffa-ez.a.run.app/stock/species'
     );
-    const jsonData = await response.json();
-    console.log(jsonData);
-    if (response.ok) {
-        setData(jsonData)
+
+    const data = await response.json();
+    if (response.ok){
+        setPlants(data)
     }
     else {
-      alert("Server fejl, prøv igen senere.")
-        setData([])
-    }
-  } export default fetchPlants
+        alert("Server fejl, prøv igen senere.")
+      }
+
+} export default fetchPlants

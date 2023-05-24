@@ -5,7 +5,7 @@ import "../css/styles.css"
 import dataNameToLabel from "../utils/dataNameToLabel"
 import "../utils/dataNameToLabel.js"
 
-function DataTable({ data, dataName }) {
+export default function DataTable({ data, dataName }) {
     return (
         <>
             <table className="green-table">
@@ -29,5 +29,3 @@ function DataTable({ data, dataName }) {
         </>
     )
 }
-
-export default DataTable
