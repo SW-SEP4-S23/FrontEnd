@@ -4,7 +4,7 @@ export default async function postThresholds(dataName, maxValue, minValue, setIs
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ "minValue": minValue, "maxValue": maxValue })
+        body: JSON.stringify({ "minValue": parseInt(minValue), "maxValue": parseInt(maxValue) })
     };
 
     await fetch(`https://cloud-app-byi2ujnffa-ez.a.run.app/environment/${dataName}/thresholds`, requestOptions)
