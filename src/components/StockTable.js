@@ -3,39 +3,10 @@ import "../css/styles.css"
 import "../css/PlantManagement.css"
 import "../css/StockTable.css"
 import "../utils/dataNameToLabel.js"
-import Amount from "../components/Amount"
 
-export default function StockTable({data, onChange, handleButtonClick, openLogbook}) {
+export default function StockTable({data, onChange, openLogbook}) {
 
-     if (data === undefined || data === null || data.length === 0)
-    data = [
-        {
-            "name": "Basilikum",
-            "id": 123,
-            "optCo2": 400,
-            "optTemp": 20,
-            "optHum": 50,
-            "amount": 10
-        },
-        {
-            "name": "Persille",
-            "id" : 234,
-            "optCo2": 400,
-            "optTemp": 21,
-            "optHum": 51,
-            "amount": 11
-        },
-        {
-            "name": "Koriander",
-            "id" : 345,
-            "optCo2": 400,
-            "optTemp": 22,
-            "optHum": 52,
-            "amount": 12
-        }        
-    ]  
-
-    console.log(data)
+    
     return (
         <>
             <table id="stock-table">
@@ -45,9 +16,8 @@ export default function StockTable({data, onChange, handleButtonClick, openLogbo
                     <th>Optimal temperatur</th>
                     <th>Optimal luftfugtighed</th>
                     <th>Optimal CO2</th>
-                    <th>Se logbog</th>
                     <th>Antal</th>
-                    <th>Rediger</th>
+                    <th></th>
                     </tr>
                     {data !== undefined && data.length !== 0 ? (data.map((item, index) => {
                         return (
@@ -58,7 +28,6 @@ export default function StockTable({data, onChange, handleButtonClick, openLogbo
                                 <td>{item.optimalCo2}</td>
                                 <td><button onClick={()=> openLogbook(item.id)}>Se logbog</button></td>
                                 <td><input type={"number"} value={item.stock} onChange={(e)=> onChange(e.target.value, item.id)}/></td>
-                                <td><button onClick={()=> handleButtonClick("edit")}>Rediger</button></td>
                             </tr>
                         )
                     })) : <tr><td colSpan={6}> Ingen data at vise.</td></tr>}                

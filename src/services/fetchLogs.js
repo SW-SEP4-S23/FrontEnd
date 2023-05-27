@@ -1,18 +1,15 @@
-export default function (plantId) {
-    return [
-        { id: plantId, date: "2021-02-05", message: "Plante oprettet" },
-        { id: plantId, date: "2021-05-06", message: "Plante vandet" },
-        { id: plantId, date: "2021-08-07", message: "Plante har insekter" },
-        { id: plantId, date: "2021-09-08", message: "Plante har frugt" },
-        { id: plantId, date: "2021-010-09", message: "Plante er død" },]
+export default async function (id, setData)
+{
+    const response = await fetch(
+        'https://cloud-app-byi2ujnffa-ez.a.run.app/stock/batch/'+id+'/logs'
+    );
 
+    const data = await response.json();
+    if (response.ok){
+        setData(data)
+    }
+    else {
+        console.log("Server fejl, prøv igen senere.")
+      }
 
-    /*return fetch(`http://localhost:3001/api/logs/${plantId}`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        */
-}
+} 

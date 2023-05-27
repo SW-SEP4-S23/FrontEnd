@@ -23,14 +23,11 @@ export default function PlantManagement() {
 	const [formTitle, setFormTitle] = useState('');
 	const [data, setData] = useState([]);
   const [mode, setMode] = useState(null);
+  const [plantSpecies, setPlantSpecies] = useState([]);
 	const [batches, setBatches] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
   const [isLogbookOpen, setIsLogbookOpen] = useState(false);
 	//const [serverFail, setServerFail] = useState([]);
-
-  useEffect(() => {
-    fetchPlants(setData);
-  }, []);
 
   useEffect(() => {
     setFilteredData(data);
@@ -121,29 +118,17 @@ export default function PlantManagement() {
 
 
 	useEffect(() => {
-
-		function handleData(data)
-		{
-			console.log(data)
-
-			data.forEach(plant => {
-				const speciesBatches = batches.filter((batch) => batch.speciesId === plant.id);
-				const plantAmount = speciesBatches.reduce((acc, batch) => acc + batch.amount, 0);
-				plant.stock = plantAmount;
-			});
-			console.log(data)
-			setData(data)
-			setFilteredData(data)
-		}
-
-		fetchPlants(handleData);
-
-	}, [batches]);
-
-	useEffect(() => {
-		fetchBathes(setBatches);
+		fetchPlants(setPlantSpecies);
 	}, []);
-
+  useEffect(() => {
+    fetchBathes(setBatches);
+  }, [plantSpecies]);
+  useEffect(() => {
+    setData(batches.map((batch) => {
+      const plant = plantSpecies.find((plant) => plant.plantName === batch.plantName);
+      return ({id: batch.id ,plantName: plant.plantName, optimalTemp: plant.optimalTemp, optimalHumidity: plant.optimalHumidity, optimalCo2: plant.optimalCo2, stock: batch.amount})
+    }));
+  }, [batches]);
 
   function onSearch(value) {
     const result = data.filter((item) => {
@@ -170,6 +155,7 @@ const [logbookData, setLogbookData] = useState([
   {date: "2021-010-09", message: "Plante er død" },]);
 function openLogbook(id) {
   setIsLogbookOpen(true);
+  fetchLogs(id, setLogbookData);
 }
 
 function logNewMessage(message) {
