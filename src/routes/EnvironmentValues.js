@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import fetchData from "../services/fetchData";
 import ServerFail from "../components/serverFail";
 import postThresholds from "../services/postThresholds";
+import fetchThresholds from "../services/fetchThresholds";
 
 export default function EnvironmentValues() {
     const [isOkBoxVisible, setIsVisible] = useState(false);
@@ -15,9 +16,8 @@ export default function EnvironmentValues() {
     const [serverFailMessage, setServerFailMessage] = useState([]);
 
     useEffect(() => {
-        //fetchThresholds({ setData: setCurrentThresholds, setServerFail: setServerFail });
-        setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 22, maxValue: 25 }, co2: { minValue: 22, maxValue: 25 } }
-        )
+        //fetchThresholds({ setThresholds: setNewThresholds, setServerFail: setServerFail });
+        setCurrentThresholds({ temperature: { minValue: 22, maxValue: 25 }, humidity: { minValue: 28, maxValue: 35 }, co2: { minValue: 0, maxValue: 50 } })
         fetchData({ setData: setCurrentValues, setServerFail: setServerFail });
     }, []);
 

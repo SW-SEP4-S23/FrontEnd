@@ -1,4 +1,4 @@
-async function fetchThresholds(setThresholds) {
+async function fetchThresholds({setThresholds}) {
   const response = await fetch(
       `https://cloud-app-byi2ujnffa-ez.a.run.app/environment/thresholds`
   )
