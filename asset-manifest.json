@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/FrontEnd/static/css/main.0f1b46d5.css",
-    "main.js": "/FrontEnd/static/js/main.00b61bb8.js",
+    "main.js": "/FrontEnd/static/js/main.4f30ba34.js",
     "static/media/notification.png": "/FrontEnd/static/media/notification.f2b6b835b98ff0dd2302.png",
     "static/media/enviromental-values.png": "/FrontEnd/static/media/enviromental-values.cc975a4d449215534740.png",
     "static/media/inventory.jpg": "/FrontEnd/static/media/inventory.1ec089d9c66a4b70cc46.jpg",
@@ -10,10 +10,10 @@
     "static/media/dropdown-logo.png": "/FrontEnd/static/media/dropdown-logo.4947d0b0b2ed97d0de8a.png",
     "index.html": "/FrontEnd/index.html",
     "main.0f1b46d5.css.map": "/FrontEnd/static/css/main.0f1b46d5.css.map",
-    "main.00b61bb8.js.map": "/FrontEnd/static/js/main.00b61bb8.js.map"
+    "main.4f30ba34.js.map": "/FrontEnd/static/js/main.4f30ba34.js.map"
   },
   "entrypoints": [
     "static/css/main.0f1b46d5.css",
-    "static/js/main.00b61bb8.js"
+    "static/js/main.4f30ba34.js"
   ]
 }
